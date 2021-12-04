@@ -1,7 +1,7 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 
-const { setTokenCookie } = require("../../utils/auth.js");
+const { setTokenCookie, restoreUser } = require("../../utils/auth.js");
 const { User } = require("../../db/models");
 
 const router = express.Router();
@@ -28,6 +28,15 @@ router.post(
     });
   })
 );
+
+router.get('/', restoreUser, (req, res) => {
+  const { user } = req;
+  if (user) {
+    return res.json({
+      user: user.toSafeObject()
+    });
+  } else return res.json({})
+});
 
 router.delete(
   '/',
