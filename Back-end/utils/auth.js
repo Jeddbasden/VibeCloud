@@ -58,7 +58,7 @@ const requireAuth = [
     err.errors = ["Unauthorized"];
     err.status = 401;
     return next(err);
-  },
+  }
 ];
 
 module.exports = { setTokenCookie, restoreUser, requireAuth };
