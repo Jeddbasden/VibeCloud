@@ -1,0 +1,23 @@
+.top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link {
+  margin: 30px;
+  color: antiquewhite;
+  
+}
+
+ul {
+  list-style-type: none;
+  width: screen width;
+  background-color: #1877f2;
+  border-radius: 50px;
+}

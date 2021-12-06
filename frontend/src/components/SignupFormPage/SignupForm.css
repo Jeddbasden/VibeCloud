@@ -1,0 +1,35 @@
+.content {
+  display: flex;
+  height: 1000px;
+  width: screen width;
+  background-color: rgb(25, 25, 26);
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.formDiv {
+  display: flex;
+  width: 300px;
+  height: 500px;
+  background-color: #1877f2;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 25px;
+}
+.form {
+  display: flex;
+  width: 300px;
+  height: 500px;
+  color: blanchedalmond;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form label {
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
