@@ -25,8 +25,8 @@ function LoginFormPage() {
   };
 
   return (
-    <div>
-      <div>
+    <div className='content'>
+      <div className='formDiv'>
         <form onSubmit={handleSubmit}>
           <ul>
             {errors.map((error, idx) => (
