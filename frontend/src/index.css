@@ -2,8 +2,9 @@
 
 html {
   background-image: url('./assets/wallpapersden.com_blue-clouds-symphony_2560x1440.jpg');
-  height: 100%;
+  height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: Verdana, Geneva, sans-serif;
 } 

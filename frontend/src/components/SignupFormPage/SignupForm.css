@@ -1,32 +1,25 @@
 .content {
   display: flex;
-  height: 1000px;
-  width: screen width;
-  background-color: rgb(25, 25, 26);
+  height: 100%;
+  width: 100%;
   border-radius: 30px;
   justify-content: center;
   align-items: center;
 }
 
-.formDiv {
-  display: flex;
-  width: 300px;
-  height: 500px;
-  background-color: #1877f2;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 25px;
-}
 form {
   display: flex;
   width: 300px;
-  height: 500px;
-  color: blanchedalmond;
+  height: 400px;
+  color: rgba(151, 157, 172);
+  background-color: rgba(0, 40, 85);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  border-radius: 20px;
 }
 form label {
   width: 100%;
@@ -37,9 +30,22 @@ form label {
 }
 form input {
   display: block;
-  border-radius: 15px;
+  border-radius: 8px;
   height: 25px;
   width: 250px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
+}
+
+.Btn {
+  display: flex;
+  width: 150px;
+  height: 25px;
+  border-radius: 15px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  color: rgba(151, 157, 172);
+  background-color: rgba(4, 102, 200);
+  font-weight: bolder;
 }
