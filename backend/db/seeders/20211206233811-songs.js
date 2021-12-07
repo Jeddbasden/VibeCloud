@@ -3,21 +3,33 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "People",
+      "Songs",
       [
         {
+          id: 1,
           userId: 1,
-          title: "Blue Mountain",
+          albumId: 1,
+          title: "Inspired Thinking",
           songUrl:
-            "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-05-05_-_Inspired_Thinking_-_www.FesliyanStudios.com_Steve_Oxen.mp3",
+          "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-05-05_-_Inspired_Thinking_-_www.FesliyanStudios.com_Steve_Oxen.mp3",
           imageUrl:
-            "https://million-wallpapers.com/wallpapers/4/9/13106154638795609352/an-icy-blue-lake-among-snow-capped-mountains.jpg",
+          "https://million-wallpapers.com/wallpapers/4/9/13106154638795609352/an-icy-blue-lake-among-snow-capped-mountains.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
 
         {
+          // id: 2,
           userId: 1,
-          title: ""
-        }
+          albumId: 1,
+          title: "Painful Memories",
+          songUrl:
+          "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-08-17_-_Painful_Memories_-_www.FesliyanStudios.com_Steve_Oxen.mp3",
+          imageUrl:
+          "http://wynwachhorst.com/wp-content/uploads/2013/09/nost-image.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
@@ -25,12 +37,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+      return queryInterface.bulkDelete('Songs', null, {});
   }
 };

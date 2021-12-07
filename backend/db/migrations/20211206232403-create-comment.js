@@ -16,7 +16,7 @@ module.exports = {
       songId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: "Songs" },
+        // references: { model: "Songs" },
       },
       comment: {
         type: Sequelize.STRING,
