@@ -6,7 +6,6 @@ module.exports = {
       "Albums",
       [
         {
-          id: 1,
           userId: 1,
           title: "In Your Feels",
           genre: "loFi",

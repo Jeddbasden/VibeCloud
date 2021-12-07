@@ -6,7 +6,6 @@ module.exports = {
       "Likes",
       [
         {
-          id: 1,
           userId: 1,
           songId: 1,
           createdAt: new Date(),
