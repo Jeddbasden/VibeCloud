@@ -6,7 +6,6 @@ module.exports = {
       "Songs",
       [
         {
-          id: 1,
           userId: 1,
           albumId: 1,
           title: "Inspired Thinking",
@@ -19,7 +18,6 @@ module.exports = {
         },
 
         {
-          // id: 2,
           userId: 1,
           albumId: 1,
           title: "Painful Memories",

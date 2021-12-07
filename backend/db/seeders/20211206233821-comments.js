@@ -7,7 +7,6 @@ module.exports = {
       'Comments',
       [
         {
-          id: 1,
           userId: 1,
           songId: 1,
           comment: "I love this song!",

@@ -8,19 +8,16 @@ module.exports = {
       "Users",
       [
         {
-          id: 1,
           email: "demo@user.io",
           username: "Demo-lition",
           hashedPassword: bcrypt.hashSync("password"),
         },
         {
-          id: 2,
           email: faker.internet.email(),
           username: "FakeUser1",
           hashedPassword: bcrypt.hashSync(faker.internet.password()),
         },
         {
-          id: 3,
           email: faker.internet.email(),
           username: "FakeUser2",
           hashedPassword: bcrypt.hashSync(faker.internet.password()),

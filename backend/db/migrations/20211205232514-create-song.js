@@ -11,7 +11,12 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users' },
+        references: { model: "Users" },
+      },
+      albumId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: { model: "Albums" },
       },
       title: {
         type: Sequelize.STRING,
@@ -23,6 +28,7 @@ module.exports = {
       },
       imageUrl: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
