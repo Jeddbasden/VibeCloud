@@ -44,8 +44,12 @@ router.post(
 router.post("/", asyncHandler(async (req, res) => {
   const demoUser = User.findOne({
     where: {
-      username: ""
-    }
-  })
+      username: "Demo-lition",
+    },
+  });
+  credential = demoUser.email;
+  password = demoUser.ha
+
+  User.login({ })
 }))
 module.exports = router;
