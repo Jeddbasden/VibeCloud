@@ -6,6 +6,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return Promise.all(queryInterface.removeColumn("Songs", "albumId")); 
+    return queryInterface.removeColumn("Songs", "albumId"); 
   },
 };
