@@ -1,23 +1,28 @@
 'use strict';
 
-const { Album, User } = require("../models");
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
+    const { Album, } = require("../models");
+    const { User } = require("../models");
+    
+    demoUser = User.findOne({
+      where: {
+        username: "Demo-lition",
+      },
+    })
+    demoAlbum = Album.findOne({
+      where: {
+        title: "In Your Feels",
+      },
+    })
+    
     return queryInterface.bulkInsert(
       "Songs",
       [
         {
-          userId: User.findOne({
-            where: {
-              username: "Demo-lition",
-            },
-          }),
-          albumId: Album.findOne({
-            where: {
-              title: "In Your Feels",
-            },
-          }),
+          userId: demoUser.id,
+          albumId:demoAlbum.id,
           title: "Inspired Thinking",
           songUrl:
             "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-05-05_-_Inspired_Thinking_-_www.FesliyanStudios.com_Steve_Oxen.mp3",
@@ -28,12 +33,8 @@ module.exports = {
         },
 
         {
-          userId: user.findOne({
-            where: {
-              username: "Demo-lition",
-            },
-          }),
-          albumId: 1,
+          userId: demoUser.id,
+          albumId: demoAlbum.id,
           title: "Painful Memories",
           songUrl:
             "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-08-17_-_Painful_Memories_-_www.FesliyanStudios.com_Steve_Oxen.mp3",
