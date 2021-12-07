@@ -3,26 +3,13 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const { Album, } = require("../models");
-    const { User } = require("../models");
-    
-    demoUser = await User.findOne({
-      where: {
-        username: "Demo-lition",
-      },
-    })
-    demoAlbum = await Album.findOne({
-      where: {
-        title: "In Your Feels",
-      },
-    })
     
     return queryInterface.bulkInsert(
       "Songs",
       [
         {
-          userId: demoUser.id,
-          albumId:demoAlbum.id,
+          userId: 1,
+          albumId:1,
           title: "Inspired Thinking",
           songUrl:
             "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-05-05_-_Inspired_Thinking_-_www.FesliyanStudios.com_Steve_Oxen.mp3",
@@ -33,8 +20,8 @@ module.exports = {
         },
 
         {
-          userId: demoUser.id,
-          albumId: demoAlbum.id,
+          userId: 1,
+          albumId: 1,
           title: "Painful Memories",
           songUrl:
             "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-08-17_-_Painful_Memories_-_www.FesliyanStudios.com_Steve_Oxen.mp3",
