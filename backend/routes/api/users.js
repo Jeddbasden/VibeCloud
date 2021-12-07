@@ -41,15 +41,9 @@ router.post(
   })
 );
 
-router.post("/", asyncHandler(async (req, res) => {
-  const demoUser = User.findOne({
-    where: {
-      username: "Demo-lition",
-    },
-  });
-  credential = demoUser.email;
-  password = demoUser.ha
+router.post("/demo", asyncHandler(async (req, res) => {
+  const { credential, password } = req.body;
 
-  User.login({ })
+  const user = await User.login({ credential, password });
 }))
 module.exports = router;

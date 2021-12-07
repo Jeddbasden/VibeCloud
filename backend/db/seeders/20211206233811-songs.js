@@ -6,12 +6,12 @@ module.exports = {
     const { Album, } = require("../models");
     const { User } = require("../models");
     
-    demoUser = User.findOne({
+    demoUser = await User.findOne({
       where: {
         username: "Demo-lition",
       },
     })
-    demoAlbum = Album.findOne({
+    demoAlbum = await Album.findOne({
       where: {
         title: "In Your Feels",
       },
