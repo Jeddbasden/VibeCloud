@@ -2,25 +2,26 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+    return queryInterface.bulkInsert(
+      "Albums",
+      [
+        {
+          id: 1,
+          userId: 1,
+          title: "In Your Feels",
+          genre: "loFi",
+          imageUrl:
+            "https://p1.music.126.net/FVJFW5FG7B2f-JtHH8BNVQ==/109951165685423491.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    );
 
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+      return queryInterface.bulkDelete('Albums', null, {});
   }
 };
