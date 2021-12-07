@@ -41,9 +41,5 @@ router.post(
   })
 );
 
-router.post("/demo", asyncHandler(async (req, res) => {
-  const { credential, password } = req.body;
 
-  const user = await User.login({ credential, password });
-}))
 module.exports = router;

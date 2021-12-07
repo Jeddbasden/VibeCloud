@@ -3,13 +3,20 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    const { Album } = require("../models");
+
+    demoAlbum = await Album.findByPK({
+      where: {
+        id: 1,
+      },
+    })
     
     return queryInterface.bulkInsert(
       "Songs",
       [
         {
           userId: 1,
-          albumId:1,
+          albumId: demoAlbum.id,
           title: "Inspired Thinking",
           songUrl:
             "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-05-05_-_Inspired_Thinking_-_www.FesliyanStudios.com_Steve_Oxen.mp3",
@@ -21,7 +28,7 @@ module.exports = {
 
         {
           userId: 1,
-          albumId: 1,
+          albumId: demoAlbum.id,
           title: "Painful Memories",
           songUrl:
             "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-08-17_-_Painful_Memories_-_www.FesliyanStudios.com_Steve_Oxen.mp3",
