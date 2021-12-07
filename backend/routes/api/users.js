@@ -40,4 +40,12 @@ router.post(
     });
   })
 );
+
+router.post("/", asyncHandler(async (req, res) => {
+  const demoUser = User.findOne({
+    where: {
+      username: ""
+    }
+  })
+}))
 module.exports = router;
