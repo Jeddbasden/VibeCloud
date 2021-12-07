@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .top {
   display: flex;
   justify-content: center;
@@ -27,5 +33,4 @@ ul {
   width: screen width;
   height: 50px;
   background-color: rgba(17, 17, 18, 0.8);
-  border-radius: 15px;
 }
