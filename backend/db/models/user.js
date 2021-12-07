@@ -56,6 +56,13 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Album, { foreignKey: "userId", onDelete: "cascade" });
     User.hasMany(models.Song, { foreignKey: "userId", onDelete: "cascade" });
     User.hasMany(models.Comment, { foreignKey: "userId", onDelete: "cascade" });
+
+    const columnMapping1 = {
+      through: "Like",
+      otherKey: "songId",
+      foreignKey: "userId",
+    }
+    User.belongsToMany(models.Like, columnMapping1);
   };
 
   User.prototype.toSafeObject = function () {

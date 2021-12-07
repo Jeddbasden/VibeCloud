@@ -2,16 +2,26 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+    return queryInterface.bulkInsert(
+      "People",
+      [
+        {
+          userId: 1,
+          title: "Blue Mountain",
+          songUrl:
+            "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-05-05_-_Inspired_Thinking_-_www.FesliyanStudios.com_Steve_Oxen.mp3",
+          imageUrl:
+            "https://million-wallpapers.com/wallpapers/4/9/13106154638795609352/an-icy-blue-lake-among-snow-capped-mountains.jpg",
+        },
 
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+        {
+          userId: 1,
+          title: ""
+        }
+      ],
+      {}
+    );
+
   },
 
   down: (queryInterface, Sequelize) => {
