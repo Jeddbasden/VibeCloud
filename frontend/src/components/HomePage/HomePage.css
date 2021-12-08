@@ -1,0 +1,17 @@
+#homeContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+}

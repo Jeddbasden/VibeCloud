@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import "./SignupForm.css";
 
@@ -12,15 +12,18 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
-
-  if (sessionUser) return <Redirect to="/" />;
+  const history = useHistory();
+  
+  
+  if (sessionUser) return <Redirect to="/home" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (e.target.name === "demoBtn") {
+      const username = "Demo-lition"
       return dispatch(
-        sessionActions.login()
+        sessionActions.demoLogin(username)
       )
     }
 
@@ -38,6 +41,13 @@ function SignupFormPage() {
       "Confirm Password field must be the same as the Password field",
     ]);
   };
+
+  const handleDemoSubmit = (e) => {
+    e.preventDefault();
+    const username = "Demo-lition";
+    dispatch(sessionActions.demoLogin(username));
+    return history.push("/");
+  }
 
 
   return (
@@ -100,7 +110,7 @@ function SignupFormPage() {
             <button
               onClick={
                 (e) => {
-                  handleSubmit(e)
+                  handleDemoSubmit(e)
                 }
               }
               className="Btn" name="demobtn" type="submit">Demo User</button>
