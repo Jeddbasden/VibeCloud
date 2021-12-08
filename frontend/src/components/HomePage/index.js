@@ -4,7 +4,11 @@ function HomePage() {
   
   return (
     <div>
-      
+      <div>
+        <ul>
+          {songs}
+        </ul>
+      </div>
     </div>
   )
 }
