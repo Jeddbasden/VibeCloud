@@ -1,9 +1,9 @@
-const router = require('express').Router()
+const express = require("express")
 const {User, Song, Album, Like, Comment} = require("../../db/models")
 const asyncHandler = require('express-async-handler')
 const { requireAuth, restoreUser } = require('../../utils/auth')
-const jwt = require('jsonwebtoken');
 
+const router = express.Router();
 
 
 router.get("/", requireAuth, restoreUser, asyncHandler(async (req, res) => {
@@ -28,7 +28,7 @@ router.get("/", requireAuth, restoreUser, asyncHandler(async (req, res) => {
     });
   });
 
-  res.json({
+  res.send({
     songs,
     albums,
     user,

@@ -6,17 +6,22 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import "./index.css";
+import HomePage from "./components/HomePage";
 
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
-
   useEffect(() => {
-    console.log("sessionUser:", sessionUser);
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+  
+  console.log("sessionUser: ", sessionUser )
+  
+  useEffect(() => {
+    
+  }, [sessionUser]);
 
   return (
     <div className='bg'>
@@ -30,7 +35,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/home">
-            
+            <HomePage/>
           </Route>
         </Switch>
       )}
