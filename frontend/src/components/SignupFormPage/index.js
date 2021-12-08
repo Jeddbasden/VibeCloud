@@ -17,6 +17,13 @@ function SignupFormPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (e.target.name === "demoBtn") {
+      return dispatch(
+        sessionActions.login()
+      )
+    }
+
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(
@@ -26,59 +33,80 @@ function SignupFormPage() {
         if (data && data.errors) setErrors(data.errors);
       });
     }
+
     return setErrors([
       "Confirm Password field must be the same as the Password field",
     ]);
   };
 
+
   return (
     <div className="content">
-      <div className='formDiv'>
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <div className='formDiv'>
           <ul>
             {errors.map((error, idx) => (
               <li key={idx}>{error}</li>
             ))}
           </ul>
-          <label>
-            Email
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Username
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Password
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Confirm Password
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </label>
-          <button className='Btn' type="submit">Sign Up</button>
-          </form>
-        </div>
+            <div className="labelInput">
+              <label>
+                Email
+                <input
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+            <div className="labelInput">
+              <label>
+                Username
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+            <div className="labelInput">
+              <label>
+                Password
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+            <div className="labelInput">
+              <label>
+                Confirm Password
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+            <div className="submitBtn">
+              <button className='Btn' type="submit">Sign Up</button>
+            </div>
+            <div>
+            <button
+              onClick={
+                (e) => {
+                  handleSubmit(e)
+                }
+              }
+              className="Btn" name="demobtn" type="submit">Demo User</button>
+            </div>
+          </div>
+        </form>
       </div>
   );
 }

@@ -3,11 +3,10 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const { Album } = require("../models");
-
-    demoAlbum = await Album.findByPK({
+    const { Album, } = require("../models");
+    const demoAlbum = await Album.findOne({
       where: {
-        id: 1,
+        title: "In Your Feels",
       },
     })
     

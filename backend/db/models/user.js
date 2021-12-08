@@ -58,11 +58,11 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Comment, { foreignKey: "userId", onDelete: "cascade" });
 
     const columnMapping1 = {
-      through: "Like",
+      through: "Likes",
       otherKey: "songId",
       foreignKey: "userId",
     }
-    User.belongsToMany(models.Like, columnMapping1);
+    User.belongsToMany(models.Song, columnMapping1);
   };
 
   User.prototype.toSafeObject = function () {
