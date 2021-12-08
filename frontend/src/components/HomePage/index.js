@@ -15,7 +15,7 @@ function HomePage() {
 
   useEffect(() => {
     // console.log("songs:", songs)
-    return dispatch(getData())
+    dispatch(getData())
   }, [])
 
   if(!sessionUser) return <Redirect to="/"/>
@@ -56,6 +56,22 @@ function HomePage() {
         </ul>
       </div>
       <div className="songUl">
+        <ul>
+          {songs.map((song) => {
+            return (
+              <li key={song.id}>
+                <div className="songImg">
+                  <img src={song.imageUrl} alt="pic failed to load"></img>
+                </div>
+                <div className="songTitle">
+                  <h3>{song.title}</h3>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="genreU;">
         <ul>
           {songs.map((song) => {
             return (

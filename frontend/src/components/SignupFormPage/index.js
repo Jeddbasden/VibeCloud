@@ -20,12 +20,6 @@ function SignupFormPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (e.target.name === "demoBtn") {
-      const username = "Demo-lition"
-      return dispatch(
-        sessionActions.demoLogin(username)
-      )
-    }
 
     if (password === confirmPassword) {
       setErrors([]);
@@ -44,9 +38,12 @@ function SignupFormPage() {
 
   const handleDemoSubmit = (e) => {
     e.preventDefault();
-    const username = "Demo-lition";
-    dispatch(sessionActions.demoLogin(username));
-    return history.push("/");
+
+    const credential = "Demo-lition"
+    const password = "password"
+    return dispatch(
+      sessionActions.login({credential, password})
+    )
   }
 
 
