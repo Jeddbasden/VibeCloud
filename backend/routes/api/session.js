@@ -46,14 +46,18 @@ router.post(
 router.post(
   "/demo",
   asyncHandler(async (req, res) => {
-    const { credential, password } = req.body;
-    const demoUser = await User.login({ credential, password });
+    const { username } = req.body;
+    const demoUser = await User.findOne({
+      where: {
+        username,
+      }
+    });
     
-    await setTokenCookie(res, demoUser)
+    await setTokenCookie(res, demoUser);
 
     return res.json({
       demoUser,
-    })
+    });
   })
 );
 

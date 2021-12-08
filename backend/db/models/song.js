@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     Song.hasMany(models.Comment, { foreignKey: "songId", onDelete: "cascade" });
 
     const columnMapping1 = {
-      through: "Like",
+      through: "Likes",
       otherKey: "userId",
       foreignKey: "songId",
     }
-    Song.belongsToMany(models.Like, columnMapping1)
+    Song.belongsToMany(models.User, columnMapping1)
   };
   return Song;
 };
