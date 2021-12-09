@@ -25,7 +25,7 @@ function Navigation({ isLoaded }) {
         <li>
           <div className='top'>
             <div className='nav'>
-              <NavLink className='link' exact to="/">
+              <NavLink className='link' exact to="/home">
                 Home
               </NavLink>
               {isLoaded && sessionLinks}

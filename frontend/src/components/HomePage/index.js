@@ -14,7 +14,6 @@ function HomePage() {
   const user = useSelector(state => state.home.user)
 
   useEffect(() => {
-    // console.log("songs:", songs)
     dispatch(getData())
   }, [])
 
