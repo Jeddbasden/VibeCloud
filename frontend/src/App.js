@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import SplashPage from "./components/SplashPage";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route path="/home">
             <HomePage/>
+          </Route>
+          <Route path="/">
+            <SplashPage />
           </Route>
         </Switch>
       )}
