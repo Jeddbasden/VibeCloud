@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getData } from "../../store/data"
+import UserPage from "../UserPage";
+import SongUploadPage from "../SongUploadPage";
 import "./HomePage.css";
 
 function HomePage() {
@@ -10,20 +12,19 @@ function HomePage() {
   const songs = useSelector(state => state.data.songs)
   const albums = useSelector(state => state.data.albums)
   const likedSongs = useSelector(state => state.data.likedSongs)
-  const user = useSelector(state => state.data.user)
 
   useEffect(() => {
     dispatch(getData())
-  }, [])
+  }, [dispatch])
 
   if(!sessionUser) return <Redirect to="/"/>
 
 
-  return songs ? (
+  return (
     <div id="homeContent">
       <div className="ulDiv">
         <ul>
-          {albums.map((album) => {
+          {albums?.map((album) => {
             return (
               <li key={album.id}>
                 <div>
@@ -39,7 +40,7 @@ function HomePage() {
       </div>
       <div className="ulDiv">
         <ul>
-          {likedSongs.map((likedSong) => {
+          {likedSongs?.map((likedSong) => {
             return (
               <li key={likedSong.id}>
                 <div className="likedSongImg">
@@ -55,7 +56,7 @@ function HomePage() {
       </div>
       <div className="ulDiv">
         <ul>
-          {songs.map((song) => {
+          {songs?.map((song) => {
             return (
               <li key={song.id}>
                 <div className="songImg">
@@ -71,7 +72,7 @@ function HomePage() {
       </div>
       <div className="ulDiv">
         <ul>
-          {songs.map((song) => {
+          {songs?.map((song) => {
             return (
               <li key={song.id}>
                 <div className="songImg">
@@ -86,8 +87,6 @@ function HomePage() {
         </ul>
       </div>
     </div>
-  ) : (
-    ""
   );
 }
 

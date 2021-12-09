@@ -5,23 +5,21 @@ const { requireAuth, restoreUser } = require("../../utils/auth");
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 
+
 const router = express.Router();
 
 
-router.post('/', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+router.post('/', requireAuth, asyncHandler(async (req, res) => {
   const { songTitle, songUrl, songImgUrl } = req.body
-  
+  const userId = req.user.id
   const newSong = await Song.create({
+    userId,
     title: songTitle,
     imageUrl: songImgUrl,
     songUrl,
   })
 
-  const song = await Song.findByPk(newSong.id)
-
-  if (song) {
-    res.json({message: "success"})
-  }else res.json({message: "failed :("})
+  res.json(newSong)
   
 }))
 
