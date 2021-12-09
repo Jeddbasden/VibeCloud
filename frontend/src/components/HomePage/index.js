@@ -71,7 +71,7 @@ function HomePage() {
           })}
         </ul>
       </div>
-      <div className="genreU;">
+      <div className="genreUl;">
         <ul>
           {songs.map((song) => {
             return (

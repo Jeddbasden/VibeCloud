@@ -24,36 +24,64 @@ function LoginFormPage() {
     );
   };
 
+  const handleDemoSubmit = (e) => {
+    e.preventDefault();
+
+    const credential = "Demo-lition";
+    const password = "password";
+    return dispatch(sessionActions.login({ credential, password }));
+  };
+
   return (
-    <div className='content'>
-      <div className='formDiv'>
-        <form onSubmit={handleSubmit}>
+    <div className="content">
+      <form onSubmit={handleSubmit}>
+        <div className="formDiv">
           <ul>
             {errors.map((error, idx) => (
               <li key={idx}>{error}</li>
             ))}
           </ul>
-          <label>
-            Username or Email
-            <input
-              type="text"
-              value={credential}
-              onChange={(e) => setCredential(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Password
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-          <button className='Btn' type="submit">Log In</button>
-        </form>
-      </div>
+          <div className="labelInput">
+            <label>
+              Username or Email
+              <input
+                type="text"
+                value={credential}
+                onChange={(e) => setCredential(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div className="labelInput">
+            <label>
+              Password
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div className="submitBtn">
+            <button className="Btn" type="submit">
+              Log In
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={(e) => {
+                handleDemoSubmit(e);
+              }}
+              className="Btn"
+              name="demobtn"
+              type="submit"
+            >
+              Demo User
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 }

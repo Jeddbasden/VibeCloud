@@ -11,10 +11,5 @@ router.use("/users", usersRouter);
 
 router.use("/home", homeRouter);
 
-router.get("/", asyncHandler(async(req, res) => {
-  const songs = await Song.findAll();
-  const albums = await Song.findAll();
-  
-}));
 
 module.exports = router;
