@@ -9,7 +9,14 @@ function Navigation({ isLoaded }) {
 
   let sessionLinks;
   if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
+    sessionLinks = (
+      <div>
+        <NavLink to="/addSong">Upload a Song</NavLink>
+        <NavLink to={`/users/${sessionUser.id}`}>My Page</NavLink>
+        <ProfileButton user={sessionUser} />;
+      </div>
+    );
+
   } else {
     sessionLinks = (
       <div>

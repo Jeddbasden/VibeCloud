@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import UserPage from "./components/UserPage";
 import SplashPage from "./components/SplashPage";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
+import HomePage from "./components/HomePage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import "./index.css";
-import HomePage from "./components/HomePage";
 
 
 function App() {
@@ -38,8 +39,11 @@ function App() {
           <Route path="/home">
             <HomePage/>
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <SplashPage />
+          </Route>
+          <Route path="/users/:id">
+            <UserPage />
           </Route>
         </Switch>
       )}

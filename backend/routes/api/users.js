@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User } = require("../../db/models");
+const { User, Song, Album, Like } = require("../../db/models");
 
 const router = express.Router();
 
@@ -39,6 +39,42 @@ router.post(
     });
   })
 );
+
+router.get("/:id", requireAuth, asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findByPk(id);
+  const likes = await Like.findAll({
+    where: {
+      userId: user.id
+    }
+  })
+  
+  let likedSongs = []
+  likes.forEach(async (like) => {
+    const song = await Song.findByPk(like.songId)
+    likedSongs.push(song)
+  });
+
+  const userAlbums = await Album.findAll({
+    where: {
+      userId: user.id,
+    }
+  });
+
+  const userSongs = await Song.findAll({
+    where: {
+      userId: user.id,
+    }
+  })
+
+  res.json({
+    user,
+    likedSongs,
+    userAlbums,
+    userSongs
+  })
+
+}));
 
 
 module.exports = router;
