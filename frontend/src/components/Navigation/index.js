@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <div>
-        <NavLink to="/addSong">Upload a Song</NavLink>
+        <NavLink to="/songUpload">Upload a Song</NavLink>
         <NavLink to={`/users/${sessionUser.id}`}>My Page</NavLink>
         <ProfileButton user={sessionUser} />;
       </div>
