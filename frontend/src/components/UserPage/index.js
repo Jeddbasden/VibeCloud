@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { getUserData } from "../../store/data";
 
 const UserPage = () => {
@@ -14,7 +13,7 @@ const UserPage = () => {
   
   useEffect(() => {
     dispatch(getUserData(id));
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <div className="UserContent">

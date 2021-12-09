@@ -12,6 +12,6 @@ router.use("/users", usersRouter);
 
 router.use("/home", homeRouter);
 
-router.use("/songs", songRouter)
+router.use("/songs", songRouter);
 
 module.exports = router;

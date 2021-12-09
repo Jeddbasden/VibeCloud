@@ -61,6 +61,8 @@ router.get("/:id", requireAuth, asyncHandler(async (req, res) => {
     }
   });
 
+  const songs = await Song.findAll()
+
   const userSongs = await Song.findAll({
     where: {
       userId: user.id,
@@ -69,6 +71,7 @@ router.get("/:id", requireAuth, asyncHandler(async (req, res) => {
 
   res.json({
     user,
+    songs,
     likedSongs,
     userAlbums,
     userSongs

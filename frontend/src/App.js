@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import UserPage from "./components/UserPage";
 import SplashPage from "./components/SplashPage";
+import UserPage from "./components/UserPage";
+import SongUploadPage from "./components/SongUploadPage";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
-import SongUploadPage from "./components/SongUploadPage";
 import HomePage from "./components/HomePage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import "./index.css";
-
+import { getData } from "./store/data";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,14 +20,12 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
   
-  console.log("sessionUser: ", sessionUser )
-  
   useEffect(() => {
-    
+    dispatch(getData())
   }, [sessionUser]);
 
   return (
-    <div className='bg'>
+    <div className="bg">
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
@@ -38,7 +36,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/home">
-            <HomePage/>
+            <HomePage />
           </Route>
           <Route exact path="/">
             <SplashPage />
