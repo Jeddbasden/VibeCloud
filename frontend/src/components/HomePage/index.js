@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { getData } from "../../store/data"
 import UserPage from "../UserPage";
 import SongUploadPage from "../SongUploadPage";
+import ReactAudioPlayer from 'react-audio-player';
 import "./HomePage.css";
 
 function HomePage() {
@@ -12,6 +13,8 @@ function HomePage() {
   const songs = useSelector(state => state.data.songs)
   const albums = useSelector(state => state.data.albums)
   const likedSongs = useSelector(state => state.data.likedSongs)
+  
+  console.log(likedSongs)
 
   useEffect(() => {
     dispatch(getData())
@@ -28,7 +31,22 @@ function HomePage() {
             return (
               <li key={album.id}>
                 <div>
-                  <img src={album.imageUrl} alt="pic failed to load"></img>
+                  <div className="albumImgDiv" 
+                    style={{
+                      backgroundImage: `url(${album.imageUrl})`,
+                      backgroundSize: "cover",
+                      height: "100px",
+                      width: "100px",
+                      borderRadius: "15px"
+                    }}
+                    onMouseOver={(e) => {
+                      e.target.className = "albumImgHover";
+                    }}
+                    onMouseOut={(e) => {
+                      const img = e.target;
+                      img.className = "albumImgDiv"
+                    }}
+                  ></div>
                 </div>
                 <div className="albumTitle">
                   <h3>{album.title}</h3>
@@ -43,9 +61,31 @@ function HomePage() {
           {likedSongs?.map((likedSong) => {
             return (
               <li key={likedSong.id}>
-                <div className="likedSongImg">
-                  <img src={likedSong.imageUrl} alt="pic failed to load"></img>
-                </div>
+                <div
+                  className="songImgDiv"
+                  style={{
+                    backgroundImage: `url(${likedSong.imageUrl})`,
+                    backgroundSize: "cover",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "15px",
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.className = "albumImgHover";
+                  }}
+                  onMouseOut={(e) => {
+                    const img = e.target;
+                    img.className = "songImgDiv";
+                  }}
+                  onClick={
+                    
+                      <ReactAudioPlayer
+                        src={`${likedSong.songUrl}`}
+                        autoPlay
+                        controls
+                      />
+                  }
+                ></div>
                 <div className="likedSongTitle">
                   <h3>{likedSong.title}</h3>
                 </div>
@@ -59,8 +99,25 @@ function HomePage() {
           {songs?.map((song) => {
             return (
               <li key={song.id}>
-                <div className="songImg">
-                  <img src={song.imageUrl} alt="pic failed to load"></img>
+                <div className="songImg"
+                  style=
+                  {{
+                    backgroundImage: `url(${song.imageUrl})`,
+                    backgroundSize: "cover",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "15px",
+                  }}
+                  onMouseOver=
+                  {(e) => {
+                    e.target.className = "songImgHover";
+                  }}
+                  onMouseOut=
+                  {(e) => {
+                    const img = e.target;
+                    img.className = "songImgDiv";
+                  }}
+                  >
                 </div>
                 <div className="songTitle">
                   <h3>{song.title}</h3>
@@ -75,8 +132,25 @@ function HomePage() {
           {songs?.map((song) => {
             return (
               <li key={song.id}>
-                <div className="songImg">
-                  <img src={song.imageUrl} alt="pic failed to load"></img>
+                <div className="songImg"
+                  style=
+                  {{
+                    backgroundImage: `url(${song.imageUrl})`,
+                    backgroundSize: "cover",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "15px",
+                  }}
+                  onMouseOver=
+                  {(e) => {
+                    e.target.className = "songImgHover";
+                  }}
+                  onMouseOut=
+                  {(e) => {
+                    const img = e.target;
+                    img.className = "songImgDiv";
+                  }}
+                  >
                 </div>
                 <div className="songTitle">
                   <h3>{song.title}</h3>
