@@ -19,11 +19,13 @@ ul {
 
 .ulDiv {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin: 15px;
+  margin: 2px;
   width: 85%;
-  height: 100px;
+  height: 200px;
   border-radius: 10px;
+  background-color: rgba(255, 252, 242, .8);
 } 
 
 .albumImgHover {
@@ -38,3 +40,18 @@ ul {
   width: 100px;
   height: 100px;
 }
+
+.songImgDiv {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 100px;
+}
+
+.songImgHover {
+  background-image: url("../../assets/img_209649.png");
+  opacity: .8;
+  background-size: fit;
+  height: 100px;
+  width: 100px;
+} 

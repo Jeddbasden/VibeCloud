@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserData } from "../../store/data";
+import ReactAudioPlayer from "react-audio-player";
 
 const UserPage = () => {
   const dispatch = useDispatch();
@@ -9,8 +10,10 @@ const UserPage = () => {
   const userAlbums = useSelector((state) => state.data.userAlbums);
   const likedSongs = useSelector((state) => state.data.likedSongs);
   const user = useSelector((state) => state.data.user);
-  const id = sessionUser.id
+  const [songUrl, setSongUrl] = useState("");
   
+  const id = sessionUser.id
+
   useEffect(() => {
     dispatch(getUserData(id));
   }, [dispatch, id]);
@@ -19,9 +22,7 @@ const UserPage = () => {
     <div className="UserContent">
       <div className="ulDiv">
         <div>
-          <div>
-
-          </div>
+          <div></div>
           <div>
             <h2>{user?.username}</h2>
           </div>
@@ -30,7 +31,8 @@ const UserPage = () => {
           {userAlbums?.map((album) => {
             return (
               <li key={album.id}>
-                <div className="albumImgDiv"
+                <div
+                  className="albumImgDiv"
                   style={{
                     backgroundImage: `url(${album.imageUrl})`,
                     backgroundSize: "cover",
@@ -42,11 +44,9 @@ const UserPage = () => {
                     e.target.className = "albumImgHover";
                   }}
                   onMouseOut={(e) => {
-                    const img = e.target;
-                    img.className = "albumImgDiv";
+                    e.target.className = "albumImgDiv";
                   }}
-                >
-                </div>
+                ></div>
                 <div className="albumTitle">
                   <h3>{album.title}</h3>
                 </div>
@@ -73,11 +73,12 @@ const UserPage = () => {
                     e.target.className = "songImgHover";
                   }}
                   onMouseOut={(e) => {
-                    const img = e.target;
-                    img.className = "songImgDiv";
+                    e.target.className = "songImgDiv";
                   }}
-                >
-                </div>
+                  onClick={() => {
+                    setSongUrl(likedSong.songUrl);
+                  }}
+                ></div>
                 <div className="likedSongTitle">
                   <h3>{likedSong.title}</h3>
                 </div>
@@ -91,26 +92,25 @@ const UserPage = () => {
           {userSongs?.map((song) => {
             return (
               <li key={song.id}>
-                <div className="songImgDiv"
-                  style=
-                  {{
+                <div
+                  className="songImgDiv"
+                  style={{
                     backgroundImage: `url(${song.imageUrl})`,
                     backgroundSize: "cover",
                     height: "100px",
                     width: "100px",
                     borderRadius: "15px",
                   }}
-                  onMouseOver=
-                  {(e) => {
+                  onMouseOver={(e) => {
                     e.target.className = "songImgHover";
                   }}
-                  onMouseOut=
-                  {(e) => {
-                    const img = e.target;
-                    img.className = "songImgDiv";
+                  onMouseOut={(e) => {
+                    e.target.className = "songImgDiv";
                   }}
-                  >
-                </div>
+                  onClick={() => {
+                    setSongUrl(song.songUrl);
+                  }}
+                ></div>
                 <div className="songTitle">
                   <h3>{song.title}</h3>
                 </div>
@@ -118,6 +118,9 @@ const UserPage = () => {
             );
           })}
         </ul>
+      </div>
+      <div className="audioPlayerDiv">
+        {songUrl && <ReactAudioPlayer src={`${songUrl}`} autoPlay controls />}
       </div>
     </div>
   );

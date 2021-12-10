@@ -1,9 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getData } from "../../store/data"
-import UserPage from "../UserPage";
-import SongUploadPage from "../SongUploadPage";
 import ReactAudioPlayer from 'react-audio-player';
 import "./HomePage.css";
 
@@ -12,9 +10,8 @@ function HomePage() {
   const sessionUser = useSelector((state) => state.session.user);
   const songs = useSelector(state => state.data.songs)
   const albums = useSelector(state => state.data.albums)
-  const likedSongs = useSelector(state => state.data.likedSongs)
-  
-  console.log(likedSongs)
+  const likedSongs = useSelector(state => state.data.likedSongs);
+  const [songUrl, setSongUrl] = useState("");
 
   useEffect(() => {
     dispatch(getData())
@@ -26,25 +23,28 @@ function HomePage() {
   return (
     <div id="homeContent">
       <div className="ulDiv">
+        <div>
+          <h2>Albums</h2>
+        </div>
         <ul>
           {albums?.map((album) => {
             return (
               <li key={album.id}>
                 <div>
-                  <div className="albumImgDiv" 
+                  <div
+                    className="albumImgDiv"
                     style={{
                       backgroundImage: `url(${album.imageUrl})`,
                       backgroundSize: "cover",
                       height: "100px",
                       width: "100px",
-                      borderRadius: "15px"
+                      borderRadius: "15px",
                     }}
                     onMouseOver={(e) => {
                       e.target.className = "albumImgHover";
                     }}
                     onMouseOut={(e) => {
-                      const img = e.target;
-                      img.className = "albumImgDiv"
+                      e.target.className = "albumImgDiv";
                     }}
                   ></div>
                 </div>
@@ -57,6 +57,9 @@ function HomePage() {
         </ul>
       </div>
       <div className="ulDiv">
+        <div>
+          <h2>Liked Songs</h2>
+        </div>
         <ul>
           {likedSongs?.map((likedSong) => {
             return (
@@ -71,21 +74,16 @@ function HomePage() {
                     borderRadius: "15px",
                   }}
                   onMouseOver={(e) => {
-                    e.target.className = "albumImgHover";
+                    e.target.className = "songImgHover";
                   }}
                   onMouseOut={(e) => {
-                    const img = e.target;
-                    img.className = "songImgDiv";
+                    e.target.className = "songImgDiv";
                   }}
-                  onClick={
-                    
-                      <ReactAudioPlayer
-                        src={`${likedSong.songUrl}`}
-                        autoPlay
-                        controls
-                      />
-                  }
-                ></div>
+                  onClick={() => {
+                    setSongUrl(likedSong.songUrl);
+                  }}
+                >
+                </div>
                 <div className="likedSongTitle">
                   <h3>{likedSong.title}</h3>
                 </div>
@@ -95,29 +93,32 @@ function HomePage() {
         </ul>
       </div>
       <div className="ulDiv">
+        <div>
+          <h2>Songs</h2>
+        </div>
         <ul>
           {songs?.map((song) => {
             return (
               <li key={song.id}>
-                <div className="songImg"
-                  style=
-                  {{
+                <div
+                  className="songImg"
+                  style={{
                     backgroundImage: `url(${song.imageUrl})`,
                     backgroundSize: "cover",
                     height: "100px",
                     width: "100px",
                     borderRadius: "15px",
                   }}
-                  onMouseOver=
-                  {(e) => {
+                  onMouseOver={(e) => {
                     e.target.className = "songImgHover";
                   }}
-                  onMouseOut=
-                  {(e) => {
-                    const img = e.target;
-                    img.className = "songImgDiv";
+                  onMouseOut={(e) => {
+                    e.target.className = "songImgDiv";
                   }}
-                  >
+                  onClick={() => {
+                    setSongUrl(song.songUrl);
+                  }}
+                >
                 </div>
                 <div className="songTitle">
                   <h3>{song.title}</h3>
@@ -127,38 +128,8 @@ function HomePage() {
           })}
         </ul>
       </div>
-      <div className="ulDiv">
-        <ul>
-          {songs?.map((song) => {
-            return (
-              <li key={song.id}>
-                <div className="songImg"
-                  style=
-                  {{
-                    backgroundImage: `url(${song.imageUrl})`,
-                    backgroundSize: "cover",
-                    height: "100px",
-                    width: "100px",
-                    borderRadius: "15px",
-                  }}
-                  onMouseOver=
-                  {(e) => {
-                    e.target.className = "songImgHover";
-                  }}
-                  onMouseOut=
-                  {(e) => {
-                    const img = e.target;
-                    img.className = "songImgDiv";
-                  }}
-                  >
-                </div>
-                <div className="songTitle">
-                  <h3>{song.title}</h3>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+      <div className="audioPlayerDiv">
+        {songUrl && ( <ReactAudioPlayer src={`${songUrl}`} autoPlay controls /> )}
       </div>
     </div>
   );
