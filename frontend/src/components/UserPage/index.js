@@ -19,14 +19,11 @@ const UserPage = () => {
   }, [dispatch, id]);
 
   return (
-    <div className="UserContent">
+    <div className="userContent">
+      <div className="title">
+        <h1>{user?.username}</h1>
+      </div>
       <div className="ulDiv">
-        <div>
-          <div></div>
-          <div>
-            <h2>{user?.username}</h2>
-          </div>
-        </div>
         <ul>
           {userAlbums?.map((album) => {
             return (

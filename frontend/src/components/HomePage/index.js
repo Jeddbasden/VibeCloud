@@ -23,7 +23,7 @@ function HomePage() {
   return (
     <div id="homeContent">
       <div className="ulDiv">
-        <div>
+        <div className="title">
           <h2>Albums</h2>
         </div>
         <ul>
@@ -59,7 +59,7 @@ function HomePage() {
         </ul>
       </div>
       <div className="ulDiv">
-        <div>
+        <div className="title">
           <h2>Liked Songs</h2>
         </div>
         <ul>
@@ -78,8 +78,11 @@ function HomePage() {
                     setSongUrl(likedSong.songUrl);
                   }}
                 >
-                  <img src="http://cdn.onlinewebfonts.com/svg/img_209649.png" alt="Play"></img>
-                  </div>
+                  <img
+                    src="http://cdn.onlinewebfonts.com/svg/img_209649.png"
+                    alt="Play"
+                  ></img>
+                </div>
                 <div
                   className="songImgDiv"
                   style={{
@@ -99,7 +102,7 @@ function HomePage() {
         </ul>
       </div>
       <div className="ulDiv">
-        <div>
+        <div className="title">
           <h2>Songs</h2>
         </div>
         <ul>
@@ -124,8 +127,7 @@ function HomePage() {
                   onClick={() => {
                     setSongUrl(song.songUrl);
                   }}
-                >
-                </div>
+                ></div>
                 <div className="songTitle">
                   <h3>{song.title}</h3>
                 </div>
@@ -135,7 +137,7 @@ function HomePage() {
         </ul>
       </div>
       <div className="audioPlayerDiv">
-        {songUrl && ( <ReactAudioPlayer src={`${songUrl}`} autoPlay controls /> )}
+        {songUrl && <ReactAudioPlayer src={`${songUrl}`} autoPlay controls />}
       </div>
     </div>
   );
