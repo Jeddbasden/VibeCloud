@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteSong, getUserData } from "../../store/data";
 import ReactAudioPlayer from "react-audio-player";
+import "./UserPage.css"
 
 const UserPage = () => {
   const dispatch = useDispatch();
@@ -133,7 +134,7 @@ const UserPage = () => {
         </ul>
       </div>
       <div className="audioPlayerDiv">
-        {songUrl && <ReactAudioPlayer src={`${songUrl}`} autoPlay controls />}
+        {songUrl && <ReactAudioPlayer className="audioPlayer" src={`${songUrl}`} autoPlay controls />}
       </div>
     </div>
   );
