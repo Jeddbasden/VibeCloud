@@ -32,21 +32,25 @@ const UserPage = () => {
             return (
               <li key={album.id}>
                 <div
-                  className="albumImgDiv"
-                  style={{
-                    backgroundImage: `url(${album.imageUrl})`,
-                    backgroundSize: "cover",
-                    height: "100px",
-                    width: "100px",
-                    borderRadius: "15px",
-                  }}
+                  className="albumEffectDiv"
                   onMouseOver={(e) => {
                     e.target.className = "albumImgHover";
                   }}
                   onMouseOut={(e) => {
-                    e.target.className = "albumImgDiv";
+                    e.target.className = "albumEffectDiv";
                   }}
-                ></div>
+                >
+                  <div
+                    className="albumImgDiv"
+                    style={{
+                      backgroundImage: `url(${album.imageUrl})`,
+                      backgroundSize: "cover",
+                      height: "100px",
+                      width: "100px",
+                      borderRadius: "15px",
+                    }}
+                  ></div>
+                </div>
                 <div className="albumTitle">
                   <h3>{album.title}</h3>
                 </div>
@@ -61,14 +65,7 @@ const UserPage = () => {
             return (
               <li key={likedSong.id}>
                 <div
-                  className="songImgDiv"
-                  style={{
-                    backgroundImage: `url(${likedSong.imageUrl})`,
-                    backgroundSize: "cover",
-                    height: "100px",
-                    width: "100px",
-                    borderRadius: "15px",
-                  }}
+                  className="songEffectDiv"
                   onMouseOver={(e) => {
                     e.target.className = "songImgHover";
                   }}
@@ -77,6 +74,21 @@ const UserPage = () => {
                   }}
                   onClick={() => {
                     setSongUrl(likedSong.songUrl);
+                  }}
+                >
+                  <img
+                    src="http://cdn.onlinewebfonts.com/svg/img_209649.png"
+                    alt="Play"
+                  ></img>
+                </div>
+                <div
+                  className="songImgDiv"
+                  style={{
+                    backgroundImage: `url(${likedSong.imageUrl})`,
+                    backgroundSize: "cover",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "15px",
                   }}
                 ></div>
                 <div className="likedSongTitle">
@@ -93,7 +105,7 @@ const UserPage = () => {
             return (
               <li key={song.id}>
                 <div
-                  className="songImgDiv"
+                  className="songImg"
                   style={{
                     backgroundImage: `url(${song.imageUrl})`,
                     backgroundSize: "cover",
