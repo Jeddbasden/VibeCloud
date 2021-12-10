@@ -30,8 +30,22 @@ const UserPage = () => {
           {userAlbums?.map((album) => {
             return (
               <li key={album.id}>
-                <div>
-                  <img src={album.imageUrl} alt="pic failed to load"></img>
+                <div className="albumImgDiv"
+                  style={{
+                    backgroundImage: `url(${album.imageUrl})`,
+                    backgroundSize: "cover",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "15px",
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.className = "albumImgHover";
+                  }}
+                  onMouseOut={(e) => {
+                    const img = e.target;
+                    img.className = "albumImgDiv";
+                  }}
+                >
                 </div>
                 <div className="albumTitle">
                   <h3>{album.title}</h3>
@@ -46,8 +60,23 @@ const UserPage = () => {
           {likedSongs?.map((likedSong) => {
             return (
               <li key={likedSong.id}>
-                <div className="likedSongImg">
-                  <img src={likedSong.imageUrl} alt="pic failed to load"></img>
+                <div
+                  className="songImgDiv"
+                  style={{
+                    backgroundImage: `url(${likedSong.imageUrl})`,
+                    backgroundSize: "cover",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "15px",
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.className = "songImgHover";
+                  }}
+                  onMouseOut={(e) => {
+                    const img = e.target;
+                    img.className = "songImgDiv";
+                  }}
+                >
                 </div>
                 <div className="likedSongTitle">
                   <h3>{likedSong.title}</h3>
@@ -62,8 +91,25 @@ const UserPage = () => {
           {userSongs?.map((song) => {
             return (
               <li key={song.id}>
-                <div className="songImg">
-                  <img src={song.imageUrl} alt="pic failed to load"></img>
+                <div className="songImgDiv"
+                  style=
+                  {{
+                    backgroundImage: `url(${song.imageUrl})`,
+                    backgroundSize: "cover",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "15px",
+                  }}
+                  onMouseOver=
+                  {(e) => {
+                    e.target.className = "songImgHover";
+                  }}
+                  onMouseOut=
+                  {(e) => {
+                    const img = e.target;
+                    img.className = "songImgDiv";
+                  }}
+                  >
                 </div>
                 <div className="songTitle">
                   <h3>{song.title}</h3>
