@@ -60,6 +60,7 @@ export default function dataReducer(state = {}, action) {
 
   switch (action.type) {
     case GIVE_DATA:
+      
       return action.payload;
     
     case ADD_DATA:
@@ -71,9 +72,11 @@ export default function dataReducer(state = {}, action) {
       return newState;
     
     case REMOVE_DATA:
-      const Oldsongs = state.songs
+      const Oldsongs = state.userSongs
       newState = { ...state };
-      newState.songs = Oldsongs.filter(song => {
+      console.log(Oldsongs)
+      newState.userSongs = Oldsongs.filter(song => {
+        console.log("ids:", song.id, action.data.id)
         return song.id !== action.data.id
       })     
       return newState

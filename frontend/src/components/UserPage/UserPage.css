@@ -7,3 +7,8 @@
   margin: 0px;
   background-color: rgba(65, 90, 119, .8);
 }
+
+.audioPlayer {
+  width: 700px;
+  height: 100px;
+}
