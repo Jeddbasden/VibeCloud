@@ -12,13 +12,14 @@ const UserPage = () => {
   const user = useSelector((state) => state.data.user);
   const [songUrl, setSongUrl] = useState("");
   
+  const handleDelete = (song) => {
+    dispatch(deleteSong(song))
+  }
+  
   useEffect(() => {
     dispatch(getUserData(sessionUser.id));
   }, [dispatch, sessionUser.id]);
   
-  const handleDelete = (song) => {
-    dispatch(deleteSong(song))
-  }
 
   return (
     <div className="userContent">
@@ -83,7 +84,7 @@ const UserPage = () => {
                   }}
                 ></div>
                 <div className="titleDiv">
-                  <div lassName="songTitle">
+                  <div className="songTitle">
                     <h3>{song.title}</h3>
                   </div>
                   <button type="submit" className="songDeleteBtn">
