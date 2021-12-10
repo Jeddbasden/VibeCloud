@@ -67,23 +67,6 @@ function HomePage() {
             return (
               <li key={likedSong.id}>
                 <div
-                  className="songEffectDiv"
-                  onMouseOver={(e) => {
-                    e.target.className = "songImgHover";
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.className = "songImgDiv";
-                  }}
-                  onClick={() => {
-                    setSongUrl(likedSong.songUrl);
-                  }}
-                >
-                  <img
-                    src="http://cdn.onlinewebfonts.com/svg/img_209649.png"
-                    alt="Play"
-                  ></img>
-                </div>
-                <div
                   className="songImgDiv"
                   style={{
                     backgroundImage: `url(${likedSong.imageUrl})`,
@@ -91,6 +74,9 @@ function HomePage() {
                     height: "100px",
                     width: "100px",
                     borderRadius: "15px",
+                  }}
+                  onClick={() => {
+                    setSongUrl(likedSong.songUrl);
                   }}
                 ></div>
                 <div className="likedSongTitle">
@@ -110,19 +96,13 @@ function HomePage() {
             return (
               <li key={song.id}>
                 <div
-                  className="songImg"
+                  className="songImgDiv"
                   style={{
                     backgroundImage: `url(${song.imageUrl})`,
                     backgroundSize: "cover",
                     height: "100px",
                     width: "100px",
                     borderRadius: "15px",
-                  }}
-                  onMouseOver={(e) => {
-                    e.target.className = "songImgHover";
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.className = "songImgDiv";
                   }}
                   onClick={() => {
                     setSongUrl(song.songUrl);
