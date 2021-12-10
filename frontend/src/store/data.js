@@ -51,7 +51,7 @@ export const deleteSong = (song) => async (dispatch) => {
     method: "DELETE",
   })
 
-  if(res.message === "Success") return dispatch(removeData(song))
+  if(res.ok) return dispatch(removeData(song))
 } 
 
 
@@ -71,16 +71,12 @@ export default function dataReducer(state = {}, action) {
       return newState;
     
     case REMOVE_DATA:
-      const deletedSong = action.data;
-      songs.map(song => {
-        if (song.id === deletedSong.id) {
-          const index = songs.indexOf(deletedSong);
-          songs.splice(index, 1)
-        }
-      })
-      newState = state.songs
+      const Oldsongs = state.songs
+      newState = { ...state };
+      newState.songs = Oldsongs.filter(song => {
+        return song.id !== action.data.id
+      })     
       return newState
-
     default:
       return state;
   }
