@@ -1,0 +1,9 @@
+.userTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  margin: 0px;
+  background-color: rgba(65, 90, 119, .8);
+}

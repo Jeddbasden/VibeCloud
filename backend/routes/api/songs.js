@@ -10,17 +10,27 @@ const router = express.Router();
 
 
 router.post('/', requireAuth, asyncHandler(async (req, res) => {
-  const { songTitle, songUrl, songImgUrl } = req.body
-  const userId = req.user.id
+  const { songTitle, songUrl, songImgUrl } = req.body;
+  const userId = req.user.id;
   const newSong = await Song.create({
     userId,
     title: songTitle,
     imageUrl: songImgUrl,
     songUrl,
-  })
+  });
 
-  res.json(newSong)
+  res.json(newSong);
   
-}))
+}));
 
+router.delete("/:id", requireAuth, asyncHandler(async (req, res) => {
+  const songId = req.params.id;
+  const song = await Song.findByPk(songId);
+
+  await song.destroy();
+
+  res.json({message: 'Success'})
+
+}));
+  
 module.exports = router

@@ -22,7 +22,7 @@ function App() {
   
   useEffect(() => {
     dispatch(getData())
-  }, [sessionUser]);
+  }, [sessionUser, dispatch]);
 
   return (
     <div className="bg">

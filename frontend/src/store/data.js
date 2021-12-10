@@ -47,24 +47,40 @@ export const addSongToDatabase = (songData) => async (dispatch) => {
 };
 
 export const deleteSong = (song) => async (dispatch) => {
-  const res = await csrfFetch()
+  const res = await csrfFetch(`/api/songs/${song.id}`, {
+    method: "DELETE",
+  })
+
+  if(res.message === "Success") return dispatch(removeData(song))
 } 
 
 
 export default function dataReducer(state = {}, action) {
-  console.log("state", state)
-  let newState
+  let newState;
+
   switch (action.type) {
     case GIVE_DATA:
       return action.payload;
+    
     case ADD_DATA:
-      const song = action.data
+      const song = action.data;
       const { songs } = state;
-      console.log("songs", songs)
-      const newSongs = [song, ...songs]
-      newState = { ...state }
+      const newSongs = [song, ...songs];
+      newState = { ...state };
       newState.songs = newSongs;
       return newState;
+    
+    case REMOVE_DATA:
+      const deletedSong = action.data;
+      songs.map(song => {
+        if (song.id === deletedSong.id) {
+          const index = songs.indexOf(deletedSong);
+          songs.splice(index, 1)
+        }
+      })
+      newState = state.songs
+      return newState
+
     default:
       return state;
   }
