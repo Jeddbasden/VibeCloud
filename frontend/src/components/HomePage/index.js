@@ -30,7 +30,15 @@ function HomePage() {
           {albums?.map((album) => {
             return (
               <li key={album.id}>
-                <div>
+                <div
+                  className="albumEffectDiv"
+                  onMouseOver={(e) => {
+                    e.target.className = "albumImgHover";
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.className = "albumEffectDiv";
+                  }}
+                >
                   <div
                     className="albumImgDiv"
                     style={{
@@ -39,12 +47,6 @@ function HomePage() {
                       height: "100px",
                       width: "100px",
                       borderRadius: "15px",
-                    }}
-                    onMouseOver={(e) => {
-                      e.target.className = "albumImgHover";
-                    }}
-                    onMouseOut={(e) => {
-                      e.target.className = "albumImgDiv";
                     }}
                   ></div>
                 </div>
@@ -65,14 +67,7 @@ function HomePage() {
             return (
               <li key={likedSong.id}>
                 <div
-                  className="songImgDiv"
-                  style={{
-                    backgroundImage: `url(${likedSong.imageUrl})`,
-                    backgroundSize: "cover",
-                    height: "100px",
-                    width: "100px",
-                    borderRadius: "15px",
-                  }}
+                  className="songEffectDiv"
                   onMouseOver={(e) => {
                     e.target.className = "songImgHover";
                   }}
@@ -83,7 +78,18 @@ function HomePage() {
                     setSongUrl(likedSong.songUrl);
                   }}
                 >
-                </div>
+                  <img src="http://cdn.onlinewebfonts.com/svg/img_209649.png" alt="Play"></img>
+                  </div>
+                <div
+                  className="songImgDiv"
+                  style={{
+                    backgroundImage: `url(${likedSong.imageUrl})`,
+                    backgroundSize: "cover",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "15px",
+                  }}
+                ></div>
                 <div className="likedSongTitle">
                   <h3>{likedSong.title}</h3>
                 </div>
