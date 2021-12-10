@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GIVE_DATA = "data/giveData";
 const ADD_DATA = "data/addData";
+const REMOVE_DATA = "data/removeData"
 
 const giveData = (data) => {
   return {
@@ -14,6 +15,11 @@ const addData = (data) => ({
   type: ADD_DATA,
   data,
 });
+
+const removeData = (data) => ({
+  type: REMOVE_DATA,
+  data,
+})
 
 export const getData = () => async (dispatch) => {
   const data = await fetch("/api/home").then((res) => res.json());
@@ -28,7 +34,6 @@ export const getUserData = (id) => async (dispatch) => {
 };
 
 export const addSongToDatabase = (songData) => async (dispatch) => {
-  console.log(songData)
   const res = await csrfFetch("/api/songs", {
     method: "POST",
     body: JSON.stringify({
@@ -39,8 +44,12 @@ export const addSongToDatabase = (songData) => async (dispatch) => {
   })
 
   if (res.ok) return dispatch(addData(songData));
-  
 };
+
+export const deleteSong = (song) => async (dispatch) => {
+  const res = await csrfFetch()
+} 
+
 
 export default function dataReducer(state = {}, action) {
   console.log("state", state)

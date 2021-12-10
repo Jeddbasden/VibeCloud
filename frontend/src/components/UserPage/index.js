@@ -11,12 +11,10 @@ const UserPage = () => {
   const likedSongs = useSelector((state) => state.data.likedSongs);
   const user = useSelector((state) => state.data.user);
   const [songUrl, setSongUrl] = useState("");
-  
-  const id = sessionUser.id
 
   useEffect(() => {
-    dispatch(getUserData(id));
-  }, [dispatch, id]);
+    dispatch(getUserData(sessionUser.id));
+  }, [dispatch]);
 
   return (
     <div className="userContent">
@@ -62,23 +60,6 @@ const UserPage = () => {
             return (
               <li key={likedSong.id}>
                 <div
-                  className="songEffectDiv"
-                  onMouseOver={(e) => {
-                    e.target.className = "songImgHover";
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.className = "songImgDiv";
-                  }}
-                  onClick={() => {
-                    setSongUrl(likedSong.songUrl);
-                  }}
-                >
-                  <img
-                    src="http://cdn.onlinewebfonts.com/svg/img_209649.png"
-                    alt="Play"
-                  ></img>
-                </div>
-                <div
                   className="songImgDiv"
                   style={{
                     backgroundImage: `url(${likedSong.imageUrl})`,
@@ -86,6 +67,9 @@ const UserPage = () => {
                     height: "100px",
                     width: "100px",
                     borderRadius: "15px",
+                  }}
+                  onClick={() => {
+                    setSongUrl(likedSong.songUrl);
                   }}
                 ></div>
                 <div className="likedSongTitle">
@@ -102,19 +86,13 @@ const UserPage = () => {
             return (
               <li key={song.id}>
                 <div
-                  className="songImg"
+                  className="songImgDiv"
                   style={{
                     backgroundImage: `url(${song.imageUrl})`,
                     backgroundSize: "cover",
                     height: "100px",
                     width: "100px",
                     borderRadius: "15px",
-                  }}
-                  onMouseOver={(e) => {
-                    e.target.className = "songImgHover";
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.className = "songImgDiv";
                   }}
                   onClick={() => {
                     setSongUrl(song.songUrl);
