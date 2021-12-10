@@ -35,7 +35,7 @@ ul {
   background-color: rgba(255, 252, 242, .9);
 } 
 
-.albumImgHover {
+.albumImgDiv:hover {
   filter: brightness(1.25);
   opacity: 1;
   width: 125px;

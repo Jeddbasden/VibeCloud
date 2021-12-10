@@ -30,15 +30,6 @@ function HomePage() {
           {albums?.map((album) => {
             return (
               <li key={album.id}>
-                <div
-                  className="albumEffectDiv"
-                  onMouseOver={(e) => {
-                    e.target.className = "albumImgHover";
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.className = "albumEffectDiv";
-                  }}
-                >
                   <div
                     className="albumImgDiv"
                     style={{
@@ -49,7 +40,6 @@ function HomePage() {
                       borderRadius: "15px",
                     }}
                   ></div>
-                </div>
                 <div className="albumTitle">
                   <h3>{album.title}</h3>
                 </div>

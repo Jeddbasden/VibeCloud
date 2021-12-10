@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteSong, getUserData } from "../../store/data";
 import ReactAudioPlayer from "react-audio-player";
 import "./UserPage.css"
+import { useHistory } from "react-router-dom";
 
 const UserPage = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const userSongs = useSelector((state) => state.data.userSongs);
@@ -21,6 +23,7 @@ const UserPage = () => {
     dispatch(getUserData(sessionUser.id));
   }, [dispatch, sessionUser.id]);
   
+
 
   return (
     <div className="userContent">
@@ -89,12 +92,24 @@ const UserPage = () => {
                     <h3>{song.title}</h3>
                   </div>
                   <button type="submit" className="songDeleteBtn">
-                    <i className="far fa-trash-alt"
+                    <i
+                      className="far fa-trash-alt"
                       value={song}
                       onClick={(e) => {
                         e.preventDefault();
-                        const confirmed = window.confirm(`Are you sure you want to delete ${song.title}`);
-                        if (confirmed) handleDelete(song)
+                        const confirmed = window.confirm(
+                          `Are you sure you want to delete ${song.title}`
+                        );
+                        if (confirmed) handleDelete(song);
+                      }}
+                    ></i>
+                  </button>
+                  <button type="submit" className="songEditBtn">
+                    <i
+                      className="fas fa-edit"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push(`/songs/edit/${song.id}`);
                       }}
                     ></i>
                   </button>
