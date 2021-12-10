@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserData } from "../../store/data";
+import { deleteSong, getUserData } from "../../store/data";
 import ReactAudioPlayer from "react-audio-player";
 
 const UserPage = () => {
@@ -11,17 +11,24 @@ const UserPage = () => {
   const likedSongs = useSelector((state) => state.data.likedSongs);
   const user = useSelector((state) => state.data.user);
   const [songUrl, setSongUrl] = useState("");
-
+  
   useEffect(() => {
     dispatch(getUserData(sessionUser.id));
-  }, [dispatch]);
+  }, [dispatch, sessionUser.id]);
+  
+  const handleDelete = (song) => {
+    dispatch(deleteSong(song))
+  }
 
   return (
     <div className="userContent">
-      <div className="title">
+      <div className="userTitle">
         <h1>{user?.username}</h1>
       </div>
       <div className="ulDiv">
+        <div className="title">
+          <h2> My Albums</h2>
+        </div>
         <ul>
           {userAlbums?.map((album) => {
             return (
@@ -55,6 +62,50 @@ const UserPage = () => {
         </ul>
       </div>
       <div className="ulDiv">
+        <div className="title">
+          <h2>My Songs</h2>
+        </div>
+        <ul>
+          {userSongs?.map((song) => {
+            return (
+              <li key={song.id}>
+                <div
+                  className="songImgDiv"
+                  style={{
+                    backgroundImage: `url(${song.imageUrl})`,
+                    backgroundSize: "cover",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "15px",
+                  }}
+                  onClick={() => {
+                    setSongUrl(song.songUrl);
+                  }}
+                ></div>
+                <div className="titleDiv">
+                  <div lassName="songTitle">
+                    <h3>{song.title}</h3>
+                  </div>
+                  <button type="submit" className="songDeleteBtn">
+                    <i className="far fa-trash-alt"
+                      value={song}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const confirmed = window.confirm(`Are you sure you want to delete ${song.title}`);
+                        if (confirmed) handleDelete(song)
+                      }}
+                    ></i>
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="ulDiv">
+        <div className="title">
+          <h2>Liked Songs</h2>
+        </div>
         <ul>
           {likedSongs?.map((likedSong) => {
             return (
@@ -74,32 +125,6 @@ const UserPage = () => {
                 ></div>
                 <div className="likedSongTitle">
                   <h3>{likedSong.title}</h3>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="ulDiv">
-        <ul>
-          {userSongs?.map((song) => {
-            return (
-              <li key={song.id}>
-                <div
-                  className="songImgDiv"
-                  style={{
-                    backgroundImage: `url(${song.imageUrl})`,
-                    backgroundSize: "cover",
-                    height: "100px",
-                    width: "100px",
-                    borderRadius: "15px",
-                  }}
-                  onClick={() => {
-                    setSongUrl(song.songUrl);
-                  }}
-                ></div>
-                <div className="songTitle">
-                  <h3>{song.title}</h3>
                 </div>
               </li>
             );
