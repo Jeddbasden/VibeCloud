@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const GIVE_DATA = "data/giveData";
 const ADD_DATA = "data/addData";
 const REMOVE_DATA = "data/removeData"
+const UPDATE_DATA = "data/updateData"
 
 const giveData = (data) => {
   return {
@@ -16,10 +17,16 @@ const addData = (data) => ({
   data,
 });
 
+const updateData = (oldData, newData) => ({
+  type: UPDATE_DATA,
+  payload: {oldData, newData},
+})
+
 const removeData = (data) => ({
   type: REMOVE_DATA,
   data,
 })
+
 
 export const getData = () => async (dispatch) => {
   const data = await fetch("/api/home").then((res) => res.json());
@@ -45,6 +52,21 @@ export const addSongToDatabase = (songData) => async (dispatch) => {
 
   if (res.ok) return dispatch(addData(songData));
 };
+
+export const updateSong = (oldSong) => async(dispatch) => {
+  const res = await csrfFetch(`/api/songs/edit/${oldSong.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      songTitle: oldSong.songTitle,
+      songUrl: oldSong.songUrl,
+      songImgUrl: oldSong.songImgUrl,
+    })
+  })
+
+  const updatedSong = await res.json()
+  console.log("updatedSong:",updatedSong)
+  if (res.ok) return dispatch(updateData(oldSong, updatedSong));
+}
 
 export const deleteSong = (song) => async (dispatch) => {
   const res = await csrfFetch(`/api/songs/${song.id}`, {
@@ -72,14 +94,21 @@ export default function dataReducer(state = {}, action) {
       return newState;
     
     case REMOVE_DATA:
-      const Oldsongs = state.userSongs
+      const oldSongs = state.userSongs
       newState = { ...state };
-      console.log(Oldsongs)
-      newState.userSongs = Oldsongs.filter(song => {
-        console.log("ids:", song.id, action.data.id)
+      newState.userSongs = oldSongs.filter(song => {
         return song.id !== action.data.id
       })     
       return newState
+    
+    case UPDATE_DATA:
+      newState = { ...state };
+      console.log("newState", newState.songs, "actionpayloadOld", action.payload.oldData,"action.payloadnewData",action.payload.newData);
+      const index = newState.songs.indexOf(action.payload.oldData);
+      console.log(index)
+      newState.songs[index] = action.playload.newData;
+      return newState
+    
     default:
       return state;
   }

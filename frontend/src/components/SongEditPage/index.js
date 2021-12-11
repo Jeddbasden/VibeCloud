@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory, useParams} from "react-router-dom";
 import { addSongToDatabase } from "../../store/data";
+import { updateSong } from "../../store/data";
 
 const SongEditpage = () => {
   let { id } = useParams();
@@ -14,12 +15,11 @@ const SongEditpage = () => {
 
   let editSong 
   songs.map(song => {
-    console.log("id:",id,"song.id:",song.id,"song:",song)
     if (song.id === id) {
       editSong = song
     }
   })
-  console.log("editSong", editSong)
+  
   const [songTitle, setSongTitle] = useState(editSong.title);
   const [songUrl, setSongUrl] = useState(editSong.songUrl);
   const [songImgUrl, setSongImgUrl] = useState(editSong.imgUrl);

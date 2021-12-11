@@ -32,5 +32,23 @@ router.delete("/:id", requireAuth, asyncHandler(async (req, res) => {
   res.json({message: 'Success'})
 
 }));
-  
+
+router.patch("/edit/:id", requireAuth, asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const { songTitle, songUrl, songImgUrl } = req.body;
+  const song = await Song.findByPk(id);
+  if (song) {
+    await song.update({
+      title: songTitle,
+      songUrl: songUrl,
+      imgUrl: songImgUrl,
+    });
+  }
+
+  const updatedSong = await Song.findByPk(id);
+
+  res.json( updatedSong )
+}))
+
+
 module.exports = router
