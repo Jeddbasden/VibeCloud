@@ -19,7 +19,8 @@ const addData = (data) => ({
 
 const updateData = (oldData, newData) => ({
   type: UPDATE_DATA,
-  payload: {oldData, newData},
+  oldData,
+  newData,
 })
 
 const removeData = (data) => ({
@@ -53,13 +54,13 @@ export const addSongToDatabase = (songData) => async (dispatch) => {
   if (res.ok) return dispatch(addData(songData));
 };
 
-export const updateSong = (oldSong) => async(dispatch) => {
-  const res = await csrfFetch(`/api/songs/edit/${oldSong.id}`, {
+export const updateSong = (oldSong, newSong) => async(dispatch) => {
+  const res = await csrfFetch(`/api/songs/edit/${newSong.id}`, {
     method: "PATCH",
     body: JSON.stringify({
-      songTitle: oldSong.songTitle,
-      songUrl: oldSong.songUrl,
-      songImgUrl: oldSong.songImgUrl,
+      songTitle: newSong.songTitle,
+      songUrl: newSong.songUrl,
+      songImgUrl: newSong.songImgUrl,
     })
   })
 
@@ -103,10 +104,10 @@ export default function dataReducer(state = {}, action) {
     
     case UPDATE_DATA:
       newState = { ...state };
-      console.log("newState", newState.songs, "actionpayloadOld", action.payload.oldData,"action.payloadnewData",action.payload.newData);
-      const index = newState.songs.indexOf(action.payload.oldData);
+      console.log("newState", newState.songs, "actionOld", action.oldData,"action.newData",action.newData);
+      const index = newState.songs.indexOf(action.oldData);
       console.log(index)
-      newState.songs[index] = action.playload.newData;
+      newState.songs[index] = action.newData;
       return newState
     
     default:

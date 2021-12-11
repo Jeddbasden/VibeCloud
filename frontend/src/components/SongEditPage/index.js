@@ -41,7 +41,7 @@ const SongEditpage = () => {
     
     setErrors(errors)
     if (errors.length === 0) {
-      dispatch(updateSong({
+      dispatch(updateSong(editSong, {
         id,
         songTitle,
         songUrl,
