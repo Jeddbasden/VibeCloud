@@ -1,0 +1,29 @@
+.commentDiv{
+  display: flex;
+  flex-direction: row
+}
+
+.indSongContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+.indSongContentDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 85%;
+  height: 95% ;
+  border-radius: 20px;
+  background: linear-gradient(to bottom right, #001845, #5C677D );
+}
+
+.imgDiv {
+  height: 40%;
+}

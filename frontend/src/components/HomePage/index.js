@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { getData } from "../../store/data"
 import ReactAudioPlayer from 'react-audio-player';
 import "./HomePage.css";
 
 function HomePage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  const songs = useSelector(state => state.data.songs)
-  const albums = useSelector(state => state.data.albums)
+  const songs = useSelector(state => state.data.songs);
+  const albums = useSelector(state => state.data.albums);
   const likedSongs = useSelector(state => state.data.likedSongs);
   const [songUrl, setSongUrl] = useState("");
 
@@ -69,8 +70,19 @@ function HomePage() {
                     setSongUrl(likedSong.songUrl);
                   }}
                 ></div>
-                <div className="likedSongTitle">
-                  <h3>{likedSong.title}</h3>
+                <div className="songTitleDiv">
+                  <div>
+                    <p>{likedSong.title}</p>
+                  </div>
+                  <button type="submit">
+                    <i
+                      class="fas fa-info-circle"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push(`/songs/${likedSong.id}`);
+                      }}
+                    ></i>
+                  </button>
                 </div>
               </li>
             );
@@ -98,8 +110,18 @@ function HomePage() {
                     setSongUrl(song.songUrl);
                   }}
                 ></div>
-                <div className="songTitle">
-                  <h3>{song.title}</h3>
+                <div className="songTitleDiv">
+                  <div>
+                    <p>{song.title}</p>
+                  </div>
+                  <button type="submit">
+                    <i class="fas fa-info-circle"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push(`/songs/${song.id}`)
+                      }}
+                    ></i>
+                  </button>
                 </div>
               </li>
             );

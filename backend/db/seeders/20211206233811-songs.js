@@ -27,7 +27,6 @@ module.exports = {
 
         {
           userId: 1,
-          albumId: demoAlbum.id,
           title: "Painful Memories",
           songUrl:
             "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/2020-08-17_-_Painful_Memories_-_www.FesliyanStudios.com_Steve_Oxen.mp3",

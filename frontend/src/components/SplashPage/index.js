@@ -22,7 +22,7 @@ const SplashPage = () => {
       <div className="splashDiv">
         <div className="splashHead">
           <h1>Welcome!</h1>
-          <h2>Lets Vibe</h2>
+          <h2>Let's Vibe</h2>
         </div>
         <div className="splashBtn">
           <button>

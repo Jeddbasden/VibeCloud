@@ -1,9 +1,13 @@
 import { csrfFetch } from "./csrf";
 
 const GIVE_DATA = "data/giveData";
+const GIVE_SONG_DATA = "data/giveSongData";
 const ADD_DATA = "data/addData";
 const REMOVE_DATA = "data/removeData"
 const UPDATE_DATA = "data/updateData"
+const REMOVE_COMMENT = "data/removeComment"
+
+
 
 const giveData = (data) => {
   return {
@@ -11,6 +15,11 @@ const giveData = (data) => {
     payload: data,
   };
 };
+
+const giveSongData = (data) => ({
+  type: GIVE_SONG_DATA,
+  data,
+});
 
 const addData = (data) => ({
   type: ADD_DATA,
@@ -27,6 +36,12 @@ const removeData = (data) => ({
   type: REMOVE_DATA,
   data,
 })
+
+const removeComment = (comment) => ({
+  type: REMOVE_COMMENT,
+  comment,
+});
+
 
 
 export const getData = () => async (dispatch) => {
@@ -54,6 +69,12 @@ export const addSongToDatabase = (songData) => async (dispatch) => {
   if (res.ok) return dispatch(addData(songData));
 };
 
+export const getSongData = (id) => async (dispatch) => {
+  const data = await csrfFetch(`/api/songs/${id}`).then(res => res.json());
+
+  return  dispatch(giveSongData(data))
+}
+
 export const updateSong = (oldSong, newSong) => async(dispatch) => {
   const res = await csrfFetch(`/api/songs/edit/${newSong.id}`, {
     method: "PATCH",
@@ -65,8 +86,15 @@ export const updateSong = (oldSong, newSong) => async(dispatch) => {
   })
 
   const updatedSong = await res.json()
-  console.log("updatedSong:",updatedSong)
   if (res.ok) return dispatch(updateData(oldSong, updatedSong));
+}
+
+export const deleteComment = (comment) => async(dispatch) => {
+  const res = await csrfFetch(`/api/comments/${comment.id}`, {
+    method: "DELETE",
+  })
+
+  if(res.ok) return dispatch(removeComment(comment))
 }
 
 export const deleteSong = (song) => async (dispatch) => {
@@ -86,6 +114,11 @@ export default function dataReducer(state = {}, action) {
       
       return action.payload;
     
+    case GIVE_SONG_DATA:
+      newState = { ...state };
+      newState = action.data;
+      return newState;
+    
     case ADD_DATA:
       const song = action.data;
       const { songs } = state;
@@ -103,13 +136,19 @@ export default function dataReducer(state = {}, action) {
       return newState
     
     case UPDATE_DATA:
-      newState = { ...state };
-      console.log("newState", newState.songs, "actionOld", action.oldData,"action.newData",action.newData);
-      const index = newState.songs.indexOf(action.oldData);
-      console.log(index)
+      const index = state.songs.indexOf(action.oldData);
+      newState = { ...state }
       newState.songs[index] = action.newData;
       return newState
     
+    case REMOVE_COMMENT:
+      const oldComments = state.comments
+      newState = { ...state };
+      newState.comments = oldComments.filter(comment => {
+        return comment.id !== action.comment.id
+      })     
+      return newState
+      
     default:
       return state;
   }
