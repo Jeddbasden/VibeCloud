@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory, useParams} from "react-router-dom";
-import { addSongToDatabase } from "../../store/data";
 import { updateSong } from "../../store/data";
 
 const SongEditpage = () => {
@@ -47,7 +46,7 @@ const SongEditpage = () => {
         songUrl,
         songImgUrl,
       }))
-      return history.push(`/users/${sessionUser.id}`)
+      return history.push(`/home`)
     }
   }
 

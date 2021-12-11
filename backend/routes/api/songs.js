@@ -1,5 +1,5 @@
 const express = require("express");
-const { User, Song, Album } = require("../../db/models");
+const { User, Song, Album, Comment } = require("../../db/models");
 const asyncHandler = require("express-async-handler");
 const { requireAuth, restoreUser } = require("../../utils/auth");
 const csrf = require('csurf');
@@ -23,15 +23,31 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
   
 }));
 
-router.delete("/:id", requireAuth, asyncHandler(async (req, res) => {
-  const songId = req.params.id;
-  const song = await Song.findByPk(songId);
 
-  await song.destroy();
+router.get("/:id", requireAuth, asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const song = await Song.findByPk(id);
+  const comments = await Comment.findAll({
+    where: {
+      songId: id,
+    }
+  });
 
-  res.json({message: 'Success'})
+  const user = await User.findOne({
+    where: {
+      id: song.userId,
+    }
+  })
 
-}));
+  const album = await Album.findOne({
+    where: {
+      id: song.albumId,
+    }
+  });
+
+  res.json({ song, comments, album, user });
+}))
+
 
 router.patch("/edit/:id", requireAuth, asyncHandler(async (req, res) => {
   const id = req.params.id;
@@ -51,4 +67,14 @@ router.patch("/edit/:id", requireAuth, asyncHandler(async (req, res) => {
 }))
 
 
+router.delete("/:id", requireAuth, asyncHandler(async (req, res) => {
+  const songId = req.params.id;
+  const song = await Song.findByPk(songId);
+
+  await song.destroy();
+
+  res.json({message: 'Success'})
+
+
+}));
 module.exports = router
