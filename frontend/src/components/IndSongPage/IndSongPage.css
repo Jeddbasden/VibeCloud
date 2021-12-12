@@ -1,6 +1,11 @@
 .commentDiv{
   display: flex;
-  flex-direction: row
+  flex-direction: row;
+  border-radius: 10px;
+  border: thick double #32a1ce;
+  padding: 5px;
+  margin: 5px;
+  justify-content: space-between;
 }
 
 .indSongContent{
@@ -19,11 +24,20 @@
   justify-content: flex-start;
   align-items: center;
   width: 85%;
-  height: 95% ;
+  height: 100% ;
   border-radius: 20px;
+  opacity: .9;
   background: linear-gradient(to bottom right, #001845, #5C677D );
 }
 
 .imgDiv {
   height: 40%;
+}
+
+.commentsUl {
+  display: flex;
+  flex-direction: column;
+}
+.commentsLi {
+  margin: 5px;
 }

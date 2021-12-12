@@ -81,28 +81,30 @@ const IndSongPage = () => {
           </form>
         </div>
         <div className="commentsUlDiv">
-          <ul>
+          <ul className="commentsUl">
             {comments &&
               comments.map((comment) => {
                 return (
-                  <li key={comment.id}>
+                  <li className="commentsLi" key={comment.id}>
                     <div className="commentDiv">
                       <p>{comment.comment}</p>
-                      <button type="submit" className="songDeleteBtn">
-                        <i
-                          className="far fa-trash-alt"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            const confirmed = window.confirm(
-                              `Are you sure you want to delete this comment?`
-                            );
-                            if (confirmed) handleCommentDelete(comment);
-                          }}
-                        ></i>
-                      </button>
-                      <button type="submit" className="songEditBtn">
-                        <i className="fas fa-edit"></i>
-                      </button>
+                      <div>
+                        <button type="submit" className="songDeleteBtn">
+                          <i
+                            className="far fa-trash-alt"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              const confirmed = window.confirm(
+                                `Are you sure you want to delete this comment?`
+                              );
+                              if (confirmed) handleCommentDelete(comment);
+                            }}
+                          ></i>
+                        </button>
+                        <button type="submit" className="songEditBtn">
+                          <i className="fas fa-edit"></i>
+                        </button>
+                      </div>
                     </div>
                   </li>
                 );
