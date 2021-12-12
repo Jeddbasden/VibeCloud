@@ -10,6 +10,7 @@ import HomePage from "./components/HomePage";
 import SongEditpage from "./components/SongEditPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import EditCommentPage from "./components/EditCommentPage";
 import IndSongPage from "./components/IndSongPage";
 import "./index.css";
 import { getData } from "./store/data";
@@ -54,6 +55,9 @@ function App() {
           </Route>
           <Route path="/songs/:id">
             <IndSongPage />
+          </Route>
+          <Route path="/comments/edit/:id">
+            <EditCommentPage />
           </Route>
         </Switch>
       )}

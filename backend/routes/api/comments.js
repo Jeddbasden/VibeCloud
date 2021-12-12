@@ -17,6 +17,22 @@ router.post("/", requireAuth, asyncHandler(async (req, res) => {
   res.json(newComment)
 }))
 
+router.patch("/edit/:id", requireAuth, asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const { newComment } = req.body;
+
+  const comment = await Comment.findByPk(id)
+  if (comment) {
+    await comment.update({
+      comment: newComment
+    });
+  }
+
+  const updatedComment = await Comment.findByPk(id)
+
+  res.json(updatedComment)
+}))
+
 router.delete("/:id", requireAuth, asyncHandler(async (req, res) => {
   const id = req.params.id;
 
