@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams, Redirect, useHistory } from "react-router-dom";
 import { deleteComment  } from "../../store/data";
 import { getSongData, addCommentToDatabase } from "../../store/data";
 import ReactAudioPlayer from "react-audio-player";
@@ -9,6 +9,7 @@ import "./IndSongPage.css";
 const IndSongPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams(); 
+  const history = useHistory();
 
   const sessionUser = useSelector(state => state.session.user);
   const song = useSelector(state =>state.data.song);
@@ -17,13 +18,15 @@ const IndSongPage = () => {
   const user = useSelector(state => state.data.user);
 
   const [songUrl, setSongUrl] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);
   
   useEffect(() => {
     dispatch(getSongData(id))
   }, [dispatch, id])
-  
+
+
   const handleComment = (e) => {
     e.preventDefault();
     const error = []
@@ -102,7 +105,12 @@ const IndSongPage = () => {
                           ></i>
                         </button>
                         <button type="submit" className="songEditBtn">
-                          <i className="fas fa-edit"></i>
+                          <i className="fas fa-edit"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              history.push(`/comments/edit/${comment.id}`)
+                            }}
+                          ></i>
                         </button>
                       </div>
                     </div>

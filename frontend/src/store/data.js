@@ -7,6 +7,7 @@ const REMOVE_DATA = "data/removeData"
 const UPDATE_DATA = "data/updateData"
 const REMOVE_COMMENT = "data/removeComment"
 const ADD_COMMENT = "data/addComment"
+const EDIT_COMMENT = "data/editComment"
 
 
 const giveData = (data) => {
@@ -45,6 +46,12 @@ const removeComment = (comment) => ({
 const addComment = (comment) => ({
   type: ADD_COMMENT,
   comment
+})
+
+const editComment = (oldComment, newComment) => ({
+  type: EDIT_COMMENT,
+  oldComment,
+  newComment,
 })
 
 
@@ -102,6 +109,15 @@ export const updateSong = (oldSong, newSong) => async(dispatch) => {
 
   const updatedSong = await res.json()
   if (res.ok) return dispatch(updateData(oldSong, updatedSong));
+}
+
+export const updateComment = (oldComment, newComment) => async (dispatch) => {
+  const res = await csrfFetch(`/api/comments/edit/${oldComment.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ newComment })
+  })
+  const updatedComment = await res.json();
+  if(res.ok) return dispatch(updateComment(oldComment, updatedComment))
 }
 
 export const deleteComment = (comment) => async(dispatch) => {
@@ -168,6 +184,18 @@ export default function dataReducer(state = {}, action) {
       const prevComments = state.comments
       newState = { ...state };
       newState.comments = [...prevComments, action.comment]
+      return newState
+    
+    case EDIT_COMMENT:
+      console.log("oldcomment:",action.oldComment)
+      const cIndex = state.comments.indexOf(action.oldComment);
+      console.log(cIndex)
+      console.log("state:",state)
+      newState = { ...state }
+      console.log("newState:", newState)
+      console.log("newComment:", action.newComment);
+      newState.comments[cIndex] = action.newComment;
+      console.log("newState:",newState)
       return newState
       
     default:
