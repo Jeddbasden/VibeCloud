@@ -7,18 +7,11 @@ const EditCommentPage = () => {
   let { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const comments = useSelector((state) => state.data.comments);
+  const oldComment = useSelector((state) =>
+    state.data.comments?.find(comment => comment.id === +id)
+  );
   const sessionUser = useSelector((state) => state.session.user);
 
-  id = parseInt(id);
-
-  let oldComment;
-
-  comments?.map((comment) => {
-    if (comment.id === id) {
-      oldComment = comment;
-    }
-  });
 
   const [comment, setComment] = useState(oldComment.comment);
 
