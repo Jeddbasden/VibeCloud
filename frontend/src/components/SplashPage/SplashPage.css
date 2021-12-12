@@ -32,3 +32,15 @@
   align-items: center;
   margin: 10px;
 }
+
+.splashABtn {
+  border-radius: 10px;
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.142);
+  background-color: #979dac;
+}
+
+#demoBtn {
+  width: auto;
+  height: auto;
+  padding: 5px;
+}

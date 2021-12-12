@@ -27,36 +27,36 @@ function HomePage() {
         <div className="title">
           <h2>Albums</h2>
         </div>
-        <ul>
+        <section className="section">
           {albums?.map((album) => {
             return (
-              <li key={album.id}>
-                  <div
-                    className="albumImgDiv"
-                    style={{
-                      backgroundImage: `url(${album.imageUrl})`,
-                      backgroundSize: "cover",
-                      height: "100px",
-                      width: "100px",
-                      borderRadius: "15px",
-                    }}
-                  ></div>
+              <div className="sectionDiv" key={album.id}>
+                <div
+                  className="albumImgDiv"
+                  style={{
+                    backgroundImage: `url(${album.imageUrl})`,
+                    backgroundSize: "cover",
+                    height: "100px",
+                    width: "100px",
+                    borderRadius: "15px",
+                  }}
+                ></div>
                 <div className="albumTitle">
                   <h3>{album.title}</h3>
                 </div>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </section>
       </div>
       <div className="ulDiv">
         <div className="title">
           <h2>Liked Songs</h2>
         </div>
-        <ul>
+        <section className="section">
           {likedSongs?.map((likedSong) => {
             return (
-              <li key={likedSong.id}>
+              <div className="sectionDiv" key={likedSong.id}>
                 <div
                   className="songImgDiv"
                   style={{
@@ -74,7 +74,7 @@ function HomePage() {
                   <div>
                     <p>{likedSong.title}</p>
                   </div>
-                  <button type="submit">
+                  <button className="iconBtn" type="submit">
                     <i
                       class="fas fa-info-circle"
                       onClick={(e) => {
@@ -84,19 +84,19 @@ function HomePage() {
                     ></i>
                   </button>
                 </div>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </section>
       </div>
       <div className="ulDiv">
         <div className="title">
           <h2>Songs</h2>
         </div>
-        <ul>
+        <section className="section">
           {songs?.map((song) => {
             return (
-              <li key={song.id}>
+              <div className="sectionDiv" key={song.id}>
                 <div
                   className="songImgDiv"
                   style={{
@@ -114,22 +114,30 @@ function HomePage() {
                   <div>
                     <p>{song.title}</p>
                   </div>
-                  <button type="submit">
-                    <i class="fas fa-info-circle"
+                  <button className="iconBtn" type="submit">
+                    <i
+                      class="fas fa-info-circle"
                       onClick={(e) => {
                         e.preventDefault();
-                        history.push(`/songs/${song.id}`)
+                        history.push(`/songs/${song.id}`);
                       }}
                     ></i>
                   </button>
                 </div>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </section>
       </div>
       <div className="audioPlayerDiv">
-        {songUrl && <ReactAudioPlayer src={`${songUrl}`} autoPlay controls />}
+        {songUrl && (
+          <ReactAudioPlayer
+            className="audioPlayer"
+            src={`${songUrl}`}
+            autoPlay
+            controls
+          />
+        )}
       </div>
     </div>
   );

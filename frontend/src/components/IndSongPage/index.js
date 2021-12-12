@@ -105,10 +105,11 @@ const IndSongPage = () => {
                           ></i>
                         </button>
                         <button type="submit" className="songEditBtn">
-                          <i className="fas fa-edit"
+                          <i
+                            className="fas fa-edit"
                             onClick={(e) => {
                               e.preventDefault();
-                              history.push(`/comments/edit/${comment.id}`)
+                              history.push(`/comments/edit/${comment.id}`);
                             }}
                           ></i>
                         </button>
@@ -120,7 +121,14 @@ const IndSongPage = () => {
           </ul>
         </div>
         <div className="audioPlayerDiv">
-          {songUrl && <ReactAudioPlayer src={`${songUrl}`} autoPlay controls />}
+          {songUrl && (
+            <ReactAudioPlayer
+              className="audioPlayer"
+              src={`${songUrl}`}
+              autoPlay
+              controls
+            />
+          )}
         </div>
       </div>
     </div>

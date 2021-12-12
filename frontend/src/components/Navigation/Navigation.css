@@ -15,11 +15,19 @@
   align-items: center;
 }
 
+.profile-dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .link {
   margin: 30px;
   color: rgba(4, 102, 200);
   text-decoration: none;
   font-weight: bold;
+  font-size: 25px;
+  font-family: Abril Fatface;
 }
 
 ul {

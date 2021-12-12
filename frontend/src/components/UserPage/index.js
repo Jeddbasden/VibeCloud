@@ -34,10 +34,10 @@ const UserPage = () => {
         <div className="title">
           <h2> My Albums</h2>
         </div>
-        <ul>
+        <section className="section">
           {userAlbums?.map((album) => {
             return (
-              <li key={album.id}>
+              <div className="sectionDiv" key={album.id}>
                 <div
                   className="albumEffectDiv"
                   onMouseOver={(e) => {
@@ -61,19 +61,19 @@ const UserPage = () => {
                 <div className="albumTitle">
                   <h3>{album.title}</h3>
                 </div>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </section>
       </div>
       <div className="ulDiv">
         <div className="title">
           <h2>My Songs</h2>
         </div>
-        <ul>
+        <section className="section">
           {userSongs?.map((song) => {
             return (
-              <li key={song.id}>
+              <div className="sectionDiv" key={song.id}>
                 <div
                   className="songImgDiv"
                   style={{
@@ -91,51 +91,53 @@ const UserPage = () => {
                   <div className="songTitle">
                     <h3>{song.title}</h3>
                   </div>
-                  <button type="submit" className="songDeleteBtn">
-                    <i
-                      className="far fa-trash-alt"
-                      value={song}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        const confirmed = window.confirm(
-                          `Are you sure you want to delete ${song.title}`
-                        );
-                        if (confirmed) handleDelete(song);
-                      }}
-                    ></i>
-                  </button>
-                  <button type="submit" className="songEditBtn">
-                    <i
-                      className="fas fa-edit"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        history.push(`/songs/edit/${song.id}`);
-                      }}
-                    ></i>
-                  </button>
-                  <button type="submit">
-                    <i
-                      class="fas fa-info-circle"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        history.push(`/songs/${song.id}`);
-                      }}
-                    ></i>
-                  </button>
+                  <div className="btnDiv">
+                    <button type="submit" className="songBtn">
+                      <i
+                        className="far fa-trash-alt"
+                        value={song}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const confirmed = window.confirm(
+                            `Are you sure you want to delete ${song.title}`
+                          );
+                          if (confirmed) handleDelete(song);
+                        }}
+                      ></i>
+                    </button>
+                      <button type="submit" className="songBtn">
+                        <i
+                          className="fas fa-edit"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            history.push(`/songs/edit/${song.id}`);
+                          }}
+                        ></i>
+                      </button>
+                      <button class="songBtn" type="submit">
+                        <i
+                          class="fas fa-info-circle"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            history.push(`/songs/${song.id}`);
+                          }}
+                        ></i>
+                      </button>
+                  </div>
                 </div>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </section>
       </div>
       <div className="ulDiv">
         <div className="title">
           <h2>Liked Songs</h2>
         </div>
-        <ul>
+        <section className="section">
           {likedSongs?.map((likedSong) => {
             return (
-              <li key={likedSong.id}>
+              <div className="sectionDiv" key={likedSong.id}>
                 <div
                   className="songImgDiv"
                   style={{
@@ -149,10 +151,10 @@ const UserPage = () => {
                     setSongUrl(likedSong.songUrl);
                   }}
                 ></div>
-                <div className="likedSongTitle">
+                <div className="songTitle">
                   <h3>{likedSong.title}</h3>
                 </div>
-                <button type="submit">
+                <button className="iconBtn" type="submit">
                   <i
                     class="fas fa-info-circle"
                     onClick={(e) => {
@@ -161,10 +163,10 @@ const UserPage = () => {
                     }}
                   ></i>
                 </button>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </section>
       </div>
       <div className="audioPlayerDiv">
         {songUrl && <ReactAudioPlayer className="audioPlayer" src={`${songUrl}`} autoPlay controls />}

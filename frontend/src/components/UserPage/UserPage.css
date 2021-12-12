@@ -12,3 +12,26 @@
   width: 700px;
   height: 100px;
 }
+
+.btnDiv {
+  height:auto;
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.songBtn {
+  width: 35px;
+  height: 25px;
+  border-radius: 5px;
+  margin: auto;
+  background-color: #979dac;
+}
+
+.songTitle {
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+  font-family: dm sans,Sans-serif;
+  font-size: 15px;
+}

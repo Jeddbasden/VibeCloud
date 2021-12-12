@@ -5,12 +5,35 @@
   align-items: center;
 }
 
+
+
+.sectionDiv {
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  grid-column-end: span 4;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  border-radius: 10px;
+
+}
+
+.section {
+  grid-column: 2 / span 8;
+  display: grid;
+  grid-template-columns: repeat(20, minmax(auto, 60px));
+  grid-gap: 15px;
+  justify-content: center;
+}
+
 #homeContent {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
 }
 
 img {
@@ -19,7 +42,7 @@ img {
   border-radius: 15px;
 }
 
-ul {
+section {
   display: flex;
   flex-direction: row;
 }
@@ -28,11 +51,12 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 2px;
+  margin: 10px;
   width: 90%;
-  height: 200px;
+  height: 100%;
   border-radius: 10px;
-  background-color: rgba(255, 252, 242, .9);
+  color: #e7eff1;
+  background: linear-gradient(to bottom right, #001845, #5C677D );
 } 
 
 .albumImgDiv:hover {
@@ -46,6 +70,7 @@ ul {
 .albumImgDiv {
   width: 100px;
   height: 100px;
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.142);
 }
 
 .albumEffectDiv {
@@ -66,7 +91,11 @@ ul {
   backface-visibility: hidden;
   height: 100px;
   width: 100px;
+  margin: auto;
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.142);
 }
+
+
 
 
 .songImgDiv:hover{
@@ -82,7 +111,7 @@ ul {
   height: 40px;
   width: 100%;
   margin: 0px;
-  background-color: rgba(65, 90, 119, .8);
+  background-color: rgba(17, 17, 18, 0.8);
 }
 
 .userTitle {
@@ -95,14 +124,19 @@ ul {
   background-color: rgba(65, 90, 119, .8);
 }
 
-.songTitleDiv {
-  display: flex;
-  flex-direction: row;
+.iconBtn {
+  border-radius: 5px;
+  background-color: #979dac;
 }
 
-.titleDiv {
-  
+.songTitleDiv {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  font-family: dm sans,Sans-serif;
+  font-size: 18px;
 }
+
 
 li {
   margin: 20px;

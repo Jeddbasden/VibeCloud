@@ -25,14 +25,14 @@ const SplashPage = () => {
           <h2>Let's Vibe</h2>
         </div>
         <div className="splashBtn">
-          <button>
+          <button className="splashABtn">
             <NavLink className="link" to="/login">
               Log In
             </NavLink>
           </button>
         </div>
         <div className="splashBtn">
-          <button>
+          <button className="splashABtn">
             <NavLink className="link" to="/signup">
               Sign Up
             </NavLink>
@@ -40,6 +40,8 @@ const SplashPage = () => {
         </div>
         <div className="splashBtn">
           <button
+            id="demoBtn"
+            className="splashABtn"
             onClick={(e) => {
               handleDemoSubmit(e);
             }}

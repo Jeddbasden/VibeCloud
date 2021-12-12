@@ -117,7 +117,7 @@ export const updateComment = (oldComment, newComment) => async (dispatch) => {
     body: JSON.stringify({ newComment })
   })
   const updatedComment = await res.json();
-  if(res.ok) return dispatch(updateComment(oldComment, updatedComment))
+  if(res.ok) return dispatch(editComment(oldComment, updatedComment))
 }
 
 export const deleteComment = (comment) => async(dispatch) => {
