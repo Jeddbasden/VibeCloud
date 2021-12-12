@@ -114,9 +114,7 @@ export const updateSong = (oldSong, newSong) => async(dispatch) => {
 export const updateComment = (oldComment, newComment) => async (dispatch) => {
   const res = await csrfFetch(`/api/comments/edit/${oldComment.id}`, {
     method: "PATCH",
-    body: JSON.stringify({
-      newComment
-    })
+    body: JSON.stringify({ newComment })
   })
   const updatedComment = await res.json();
   if(res.ok) return dispatch(updateComment(oldComment, updatedComment))
@@ -189,9 +187,15 @@ export default function dataReducer(state = {}, action) {
       return newState
     
     case EDIT_COMMENT:
+      console.log("oldcomment:",action.oldComment)
       const cIndex = state.comments.indexOf(action.oldComment);
+      console.log(cIndex)
+      console.log("state:",state)
       newState = { ...state }
+      console.log("newState:", newState)
+      console.log("newComment:", action.newComment);
       newState.comments[cIndex] = action.newComment;
+      console.log("newState:",newState)
       return newState
       
     default:

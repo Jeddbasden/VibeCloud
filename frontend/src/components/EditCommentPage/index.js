@@ -28,7 +28,7 @@ const EditCommentPage = () => {
   const handleEdit = (e) => {
     e.preventDefault();
     dispatch(updateComment(oldComment, comment))
-    return history.push(`/songs/${comment.songId}`);
+    return history.push(`/songs/${oldComment.songId}`);
   };
 
   return (
