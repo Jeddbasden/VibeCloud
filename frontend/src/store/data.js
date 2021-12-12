@@ -6,7 +6,7 @@ const ADD_DATA = "data/addData";
 const REMOVE_DATA = "data/removeData"
 const UPDATE_DATA = "data/updateData"
 const REMOVE_COMMENT = "data/removeComment"
-
+const ADD_COMMENT = "data/addComment"
 
 
 const giveData = (data) => {
@@ -42,6 +42,10 @@ const removeComment = (comment) => ({
   comment,
 });
 
+const addComment = (comment) => ({
+  type: ADD_COMMENT,
+  comment
+})
 
 
 export const getData = () => async (dispatch) => {
@@ -68,6 +72,17 @@ export const addSongToDatabase = (songData) => async (dispatch) => {
 
   if (res.ok) return dispatch(addData(songData));
 };
+
+export const addCommentToDatabase = ( comment, songId) => async (dispatch) => {
+  const res = await csrfFetch("/api/comments", {
+    method: "POST",
+    body: JSON.stringify({ comment, songId }),
+  });
+
+  const newComment = await res.json()
+  console.log(newComment)
+  return dispatch(addComment(newComment))
+}
 
 export const getSongData = (id) => async (dispatch) => {
   const data = await csrfFetch(`/api/songs/${id}`).then(res => res.json());
@@ -147,6 +162,12 @@ export default function dataReducer(state = {}, action) {
       newState.comments = oldComments.filter(comment => {
         return comment.id !== action.comment.id
       })     
+      return newState
+    
+    case ADD_COMMENT:
+      const prevComments = state.comments
+      newState = { ...state };
+      newState.comments = [...prevComments, action.comment]
       return newState
       
     default:

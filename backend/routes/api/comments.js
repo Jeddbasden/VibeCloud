@@ -1,11 +1,21 @@
 const express = require("express");
-const { User, Song, Album, Comment } = require("../../db/models");
+const { Comment } = require("../../db/models");
 const asyncHandler = require("express-async-handler");
-const { requireAuth, restoreUser } = require("../../utils/auth");
-const csrf = require("csurf");
-const csrfProtection = csrf({ cookie: true });
+const { requireAuth } = require("../../utils/auth");
 
 const router = express.Router();
+
+router.post("/", requireAuth, asyncHandler(async (req, res) => {
+  const { comment, songId } = req.body;
+  const userId = req.user.id;
+  const newComment = await Comment.create({
+    userId,
+    songId,
+    comment,
+  })
+
+  res.json(newComment)
+}))
 
 router.delete("/:id", requireAuth, asyncHandler(async (req, res) => {
   const id = req.params.id;

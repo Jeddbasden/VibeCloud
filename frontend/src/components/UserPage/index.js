@@ -113,6 +113,15 @@ const UserPage = () => {
                       }}
                     ></i>
                   </button>
+                  <button type="submit">
+                    <i
+                      class="fas fa-info-circle"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push(`/songs/${song.id}`);
+                      }}
+                    ></i>
+                  </button>
                 </div>
               </li>
             );
@@ -143,6 +152,15 @@ const UserPage = () => {
                 <div className="likedSongTitle">
                   <h3>{likedSong.title}</h3>
                 </div>
+                <button type="submit">
+                  <i
+                    class="fas fa-info-circle"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      history.push(`/songs/${likedSong.id}`);
+                    }}
+                  ></i>
+                </button>
               </li>
             );
           })}
