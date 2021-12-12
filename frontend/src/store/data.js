@@ -112,6 +112,7 @@ export const updateSong = (oldSong, newSong) => async(dispatch) => {
 }
 
 export const updateComment = (oldComment, newComment) => async (dispatch) => {
+  console.log("newComment:",newComment)
   const res = await csrfFetch(`/api/comments/edit/${oldComment.id}`, {
     method: "PATCH",
     body: JSON.stringify({ newComment })

@@ -20,6 +20,7 @@ router.post("/", requireAuth, asyncHandler(async (req, res) => {
 router.patch("/edit/:id", requireAuth, asyncHandler(async (req, res) => {
   const id = req.params.id;
   const { newComment } = req.body;
+  console.log("newComment:", newComment)
   const oldComment = await Comment.findByPk(id)
   console.log("COMMENTBEFOREUPDATE:",oldComment)
 
