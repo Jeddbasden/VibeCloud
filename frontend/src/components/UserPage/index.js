@@ -105,24 +105,25 @@ const UserPage = () => {
                         }}
                       ></i>
                     </button>
-                      <button type="submit" className="songBtn">
-                        <i
-                          className="fas fa-edit"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            history.push(`/songs/edit/${song.id}`);
-                          }}
-                        ></i>
-                      </button>
-                      <button class="songBtn" type="submit">
-                        <i
-                          class="fas fa-info-circle"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            history.push(`/songs/${song.id}`);
-                          }}
-                        ></i>
-                      </button>
+                    <button type="submit" className="songBtn">
+                      <i
+                        className="fas fa-edit"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          history.push(`/songs/edit/${song.id}`);
+                        }}
+                      ></i>
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        history.push(`/songs/${song.id}`);
+                      }}
+                      class="songBtn"
+                      type="submit"
+                    >
+                      <i class="fas fa-info-circle"></i>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -154,14 +155,15 @@ const UserPage = () => {
                 <div className="songTitle">
                   <h3>{likedSong.title}</h3>
                 </div>
-                <button className="iconBtn" type="submit">
-                  <i
-                    class="fas fa-info-circle"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      history.push(`/songs/${likedSong.id}`);
-                    }}
-                  ></i>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    history.push(`/songs/${likedSong.id}`);
+                  }}
+                  className="iconBtn"
+                  type="submit"
+                >
+                  <i class="fas fa-info-circle"></i>
                 </button>
               </div>
             );

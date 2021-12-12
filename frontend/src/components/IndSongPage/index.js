@@ -17,13 +17,15 @@ const IndSongPage = () => {
   const comments = useSelector(state => state.data.comments);
   const user = useSelector(state => state.data.user);
 
+  console.log("song:",song)
+
   const [songUrl, setSongUrl] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);
   
   useEffect(() => {
     dispatch(getSongData(id))
+    setComment("")
   }, [dispatch, id])
 
 
@@ -43,28 +45,36 @@ const IndSongPage = () => {
 
   return song ? (
     <div className="indSongContent">
+      <div className="indSongTitle">
+        <h1>{song.title}</h1>
+      </div>
       <div className="indSongContentDiv">
-        <div className="imgDiv">
-          <img
-            src={`${song.imgUrl}`}
-            alt=""
-            onClick={(e) => {
-              setSongUrl(song.url);
-            }}
-          />
+        <div
+          onClick={(e) => {
+            setSongUrl(song.songUrl)
+          }}
+          className="imgDiv">
+          <img className="indSongimg" src={`${song.imageUrl}`} alt="" />
         </div>
-        <div className="titleDiv">
-          <div className="title">
-            <h1>{song.title}</h1>
+        <div className="audioPlayerDiv">
+          {songUrl && (
+            <ReactAudioPlayer
+              className="audioPlayer"
+              src={`${songUrl}`}
+              autoPlay
+              controls
+            />
+          )}
+        </div>
+        <div className="indTitleDiv">
+          <div className="username">
+            <h2>Created By: {user.username}</h2>
           </div>
           {album && (
-            <div className="albumTitle">
-              <h3>{album.title}</h3>
+            <div className="indAlbumTitle">
+              <h3>Album: {album.title}</h3>
             </div>
           )}
-          <div className="username">
-            <h2>By {user.username}</h2>
-          </div>
         </div>
         <div>
           <form type="submit" onSubmit={handleComment}>
@@ -73,17 +83,23 @@ const IndSongPage = () => {
                 <li key={idx}>{error}</li>
               ))}
             </ul>
-            <label className="label">Add a Comment</label>
-            <input
-              type="text"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              required
-            ></input>
-            <button type="submit">add</button>
+            <div className="addCommentDiv">
+              <label className="label">Add a Comment</label>
+              <div className="addCommentInputDiv">
+                <input
+                  type="text"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  required
+                ></input>
+                <button className="addBtn" type="submit">
+                  add
+                </button>
+              </div>
+            </div>
           </form>
         </div>
-        <div className="commentsUlDiv">
+        <div id="commentsUlDiv">
           <ul className="commentsUl">
             {comments &&
               comments.map((comment) => {
@@ -92,7 +108,7 @@ const IndSongPage = () => {
                     <div className="commentDiv">
                       <p>{comment.comment}</p>
                       <div>
-                        <button type="submit" className="songDeleteBtn">
+                        <button type="submit" className="indSongBtn">
                           <i
                             className="far fa-trash-alt"
                             onClick={(e) => {
@@ -104,7 +120,7 @@ const IndSongPage = () => {
                             }}
                           ></i>
                         </button>
-                        <button type="submit" className="songEditBtn">
+                        <button type="submit" className="indSongBtn">
                           <i
                             className="fas fa-edit"
                             onClick={(e) => {
@@ -119,16 +135,6 @@ const IndSongPage = () => {
                 );
               })}
           </ul>
-        </div>
-        <div className="audioPlayerDiv">
-          {songUrl && (
-            <ReactAudioPlayer
-              className="audioPlayer"
-              src={`${songUrl}`}
-              autoPlay
-              controls
-            />
-          )}
         </div>
       </div>
     </div>

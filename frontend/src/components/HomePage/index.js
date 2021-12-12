@@ -74,14 +74,15 @@ function HomePage() {
                   <div>
                     <p>{likedSong.title}</p>
                   </div>
-                  <button className="iconBtn" type="submit">
-                    <i
-                      class="fas fa-info-circle"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        history.push(`/songs/${likedSong.id}`);
-                      }}
-                    ></i>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      history.push(`/songs/${likedSong.id}`);
+                    }}
+                    className="iconBtn"
+                    type="submit"
+                  >
+                    <i class="fas fa-info-circle"></i>
                   </button>
                 </div>
               </div>
@@ -114,14 +115,15 @@ function HomePage() {
                   <div>
                     <p>{song.title}</p>
                   </div>
-                  <button className="iconBtn" type="submit">
-                    <i
-                      class="fas fa-info-circle"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        history.push(`/songs/${song.id}`);
-                      }}
-                    ></i>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      history.push(`/songs/${song.id}`);
+                    }}
+                    className="iconBtn"
+                    type="submit"
+                  >
+                    <i class="fas fa-info-circle"></i>
                   </button>
                 </div>
               </div>

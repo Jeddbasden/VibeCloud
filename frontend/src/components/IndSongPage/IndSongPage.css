@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: row;
   border-radius: 10px;
-  border: thick double #32a1ce;
+  border: double #32a1ce;
+  box-shadow: -2px 2px rgba(0, 0, 0, 0.142);
   padding: 5px;
   margin: 5px;
   justify-content: space-between;
@@ -14,8 +15,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
-  color: white;
+  height: auto;
+  font-family: dm sans,Sans-serif;
 }
 
 .indSongContentDiv{
@@ -24,20 +25,87 @@
   justify-content: flex-start;
   align-items: center;
   width: 85%;
-  height: 100% ;
+  height: auto ;
+  margin-top: 15px;
   border-radius: 20px;
   opacity: .9;
+  color: #e7eff1;
   background: linear-gradient(to bottom right, #001845, #5C677D );
 }
 
+.indSongimg {
+  width: 100%;
+  height: 100%;
+  margin-top: 25px;
+  border-radius: 20px;
+}
+
 .imgDiv {
-  height: 40%;
+  height: 60%;
+  width: 60%;
 }
 
 .commentsUl {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .commentsLi {
   margin: 5px;
+}
+
+.indSongTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  margin: 0px;
+  color: rgba(4, 102, 200);
+  background-color: rgba(17, 17, 18, 0.8);
+}
+
+.indTitleDiv {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 45%;
+  border-radius: 25px;
+  background-color: rgba(17, 17, 18, 0.8);
+}
+
+.username {
+  margin: 10px;
+}
+
+.indAlbumTitle {
+  margin: 10px;
+}
+
+.addCommentInputDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.addBtn {
+  border-radius: 5px;
+  background-color: #979dac;
+  margin: 10px;
+  width: 35px;
+  height: 25px;
+}
+
+#commentUlDiv {
+  border-radius: 20px;
+  background-color: rgba(17, 17, 18, 0.8);
+  height: auto;
+  width: auto;
+}
+
+.indSongBtn {
+  margin: 3px;
+  background-color: #979dac;
+  border-radius: 5px;
 }
