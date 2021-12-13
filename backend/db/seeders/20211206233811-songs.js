@@ -163,7 +163,7 @@ module.exports = {
           songUrl:
             "https://f002.backblazeb2.com/file/VibeCloud/VibeCloudMusic/Ludovico+Einaudi+_+Experience.mp3",
           imageUrl:
-            "http://wynwachhorst.com/wp-content/uploads/2013/09/nost-image.jpg",
+            "https://d.newsweek.com/en/full/1033918/aang-energy-ozai.png",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

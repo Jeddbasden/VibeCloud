@@ -148,7 +148,7 @@ const IndSongPage = () => {
       </div>
     </div>
   ) : (
-    dispatch(getSongData(id))
+    ''
   );
 }
 
