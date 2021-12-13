@@ -20,7 +20,7 @@ const SongUploadPage = () => {
 
     if (!songTitle) errors.push("Please add a song Title");
     if (!songUrl) errors.push("Please add a song Url");
-    if (!(/\.mp3$/.test(songUrl))) errors.push("Please enter a valid mp3 Url");
+    // if (!(/\.mp3$/.test(songUrl))) errors.push("Please enter a valid mp3 Url");
     if (!songImgUrl) {
       setSongImgUrl("https://www.supercheapauto.co.nz/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw15da72ad/images/541944/SCA_541944_hi-res.jpg?sw=1000&sh=1000&sm=fit");
     }
