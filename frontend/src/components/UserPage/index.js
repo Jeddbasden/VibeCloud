@@ -168,7 +168,7 @@ const UserPage = () => {
               </div>
             );
           })}
-        </section>
+        </section >
       </div>
       <div className="audioPlayerDiv">
         {songUrl && <ReactAudioPlayer className="audioPlayer" src={`${songUrl}`} autoPlay controls />}
