@@ -26,10 +26,10 @@ const IndSongPage = () => {
   useEffect(() => {
     dispatch(getSongData(id))
     setComment("")
-  }, [dispatch, id, comment])
+  }, [dispatch, id ])
 
 
-  const handleComment = (e) => {
+  const handleComment =  async (e) => {
     e.preventDefault();
     const error = []
     if(!comment) error.push("please write your comment")
