@@ -28,6 +28,7 @@
   font-weight: bold;
   font-size: 25px;
   font-family: Abril Fatface;
+  height: 100%;
 }
 
 ul {
@@ -41,4 +42,11 @@ ul {
   width: screen width;
   height: 50px;
   background-color: rgba(17, 17, 18, 0.8);
+}
+
+.profileBtn {
+  width: 25px;
+  height: 20px;
+  border-radius: 10px;
+  color: rgba(4, 102, 200);
 }
