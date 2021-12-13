@@ -12,8 +12,11 @@
 - Following users
 
 # Installation
-- Install dependencies running:
-  npm install
 - Clone the repo
+- Install dependencies running:
+  ```npm install```
+- Make a database and user
+- create a .env file based off the .envExample
 - Migrate and Seed running: 
-  ```npx dotenv sequlize db:migrate
+  ```npx dotenv sequlize db:migrate & npx dotenv sequelize seed:all``
+- Start the app with: npm start
