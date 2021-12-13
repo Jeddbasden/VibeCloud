@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
         <NavLink className="link" to={`/users/${sessionUser.id}`}>
           My Page
         </NavLink>
-        <ProfileButton user={sessionUser} />;
+        <ProfileButton user={sessionUser} />
       </div>
     );
 

@@ -125,6 +125,7 @@ section {
 .iconBtn {
   border-radius: 5px;
   background-color: #979dac;
+  height: 20px;
 }
 
 .songTitleDiv {
