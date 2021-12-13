@@ -77,6 +77,10 @@ section {
   height: 100px;
 }
 
+.albumTitle {
+  margin-top: 10px;
+
+}
 
 .songImgDiv {
   display: flex;
