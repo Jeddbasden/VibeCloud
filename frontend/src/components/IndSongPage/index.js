@@ -26,7 +26,7 @@ const IndSongPage = () => {
   useEffect(() => {
     dispatch(getSongData(id))
     setComment("")
-  }, [dispatch, id])
+  }, [dispatch, id, comment])
 
 
   const handleComment = (e) => {
@@ -52,10 +52,18 @@ const IndSongPage = () => {
       <div className="indSongContentDiv">
         <div
           onClick={(e) => {
-            setSongUrl(song.songUrl)
+            setSongUrl(song.songUrl);
           }}
-          className="imgDiv">
-          <img className="indSongimg" src={`${song.imageUrl}`} alt="" />
+          className="imgDiv"
+        >
+          <img
+            className="indSongimg"
+            src={`${
+              song.imageUrl ||
+              "https://www.supercheapauto.co.nz/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw15da72ad/images/541944/SCA_541944_hi-res.jpg?sw=1000&sh=1000&sm=fit"
+            }`}
+            alt=""
+          />
         </div>
         <div className="audioPlayerDiv">
           {songUrl && (
@@ -140,7 +148,7 @@ const IndSongPage = () => {
       </div>
     </div>
   ) : (
-    ""
+    dispatch(getSongData(id))
   );
 }
 

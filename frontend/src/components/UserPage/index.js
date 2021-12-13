@@ -77,7 +77,10 @@ const UserPage = () => {
                 <div
                   className="songImgDiv"
                   style={{
-                    backgroundImage: `url(${song.imageUrl})`,
+                    backgroundImage: `url(${
+                      song.imageUrl ||
+                      "https://www.supercheapauto.co.nz/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw15da72ad/images/541944/SCA_541944_hi-res.jpg?sw=1000&sh=1000&sm=fit"
+                    })`,
                     backgroundSize: "cover",
                     height: "100px",
                     width: "100px",
@@ -142,7 +145,10 @@ const UserPage = () => {
                 <div
                   className="songImgDiv"
                   style={{
-                    backgroundImage: `url(${likedSong.imageUrl})`,
+                    backgroundImage: `url(${
+                      likedSong.imageUrl ||
+                      "https://www.supercheapauto.co.nz/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw15da72ad/images/541944/SCA_541944_hi-res.jpg?sw=1000&sh=1000&sm=fit"
+                    })`,
                     backgroundSize: "cover",
                     height: "100px",
                     width: "100px",
