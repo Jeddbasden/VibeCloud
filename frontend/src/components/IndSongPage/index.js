@@ -34,7 +34,8 @@ const IndSongPage = () => {
     const error = []
     if(!comment) error.push("please write your comment")
     setErrors(error)
-    if(errors.length === 0) dispatch(addCommentToDatabase(comment, song.id))
+    if (errors.length === 0) dispatch(addCommentToDatabase(comment, song.id))
+    setComment("")
   } 
 
   const handleCommentDelete = (comment) => {
