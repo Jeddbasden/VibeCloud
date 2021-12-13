@@ -11,8 +11,15 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <div>
-        <NavLink className="link" to="/songUpload">Upload a Song</NavLink>
-        <NavLink className="link" to={`/users/${sessionUser.id}`}>My Page</NavLink>
+        <NavLink className="link" exact to="/home">
+          Discover
+        </NavLink>
+        <NavLink className="link" to="/songUpload">
+          Upload a Song
+        </NavLink>
+        <NavLink className="link" to={`/users/${sessionUser.id}`}>
+          My Page
+        </NavLink>
         <ProfileButton user={sessionUser} />;
       </div>
     );
@@ -32,9 +39,6 @@ function Navigation({ isLoaded }) {
         <li>
           <div className='top'>
             <div className='nav'>
-              <NavLink className='link' exact to="/home">
-                Discover
-              </NavLink>
               {isLoaded && sessionLinks}
             </div>
           </div>
