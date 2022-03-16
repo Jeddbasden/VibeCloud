@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <div>
+      <div className='navLinks'>
         <NavLink className="link" exact to="/home">
           Discover
         </NavLink>

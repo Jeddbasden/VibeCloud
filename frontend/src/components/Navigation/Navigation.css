@@ -35,6 +35,12 @@ ul {
   list-style-type: none;
 }
 
+.navLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .navbar {
   display: flex;
   justify-content: center;
