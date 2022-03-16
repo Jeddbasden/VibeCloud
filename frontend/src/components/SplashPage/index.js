@@ -1,13 +1,14 @@
 import "./SplashPage.css"
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";  
 
 const SplashPage = () => {
   const dispatch = useDispatch()
-
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  if (sessionUser) return <Redirect to="/home" />;
+  
+  if (sessionUser) history.push("/home")
 
   const handleDemoSubmit = (e) => {
     e.preventDefault();

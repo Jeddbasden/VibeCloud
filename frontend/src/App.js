@@ -9,6 +9,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import HomePage from "./components/HomePage";
 import SongEditpage from "./components/SongEditPage";
 import * as sessionActions from "./store/session";
+import IndAlbumPage from "./components/IndAlbumPage";
 import Navigation from "./components/Navigation";
 import EditCommentPage from "./components/EditCommentPage";
 import IndSongPage from "./components/IndSongPage";
@@ -41,7 +42,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/home">
+          <Route exact path="/home">
             <HomePage />
           </Route>
           <Route path="/users/:id">
@@ -50,11 +51,14 @@ function App() {
           <Route path="/songUpload">
             <SongUploadPage />
           </Route>
-          <Route path="/songs/edit/:id">
-            <SongEditpage />
-          </Route>
           <Route path="/songs/:id">
             <IndSongPage />
+          </Route>
+          <Route exact path="/albums/:id">
+            <IndAlbumPage />
+          </Route>
+          <Route path="/songs/edit/:id">
+            <SongEditpage />
           </Route>
           <Route path="/comments/edit/:id">
             <EditCommentPage />

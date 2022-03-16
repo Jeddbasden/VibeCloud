@@ -20,6 +20,9 @@ function HomePage() {
 
   if(!sessionUser) return <Redirect to="/"/>
 
+  const handleRedirect = (album) => {
+    history.push(`/albums/${album.id}`)
+  }
 
   return (
     <div id="homeContent">
@@ -32,6 +35,10 @@ function HomePage() {
             return (
               <div className="sectionDiv" key={album.id}>
                 <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    history.push(`/albums/${album.id}`);
+                  }}
                   className="albumImgDiv"
                   style={{
                     backgroundImage: `url(${album.imageUrl})`,
