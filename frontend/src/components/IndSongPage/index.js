@@ -75,6 +75,7 @@ const IndSongPage = () => {
         </div>
         <div className="indTitleDiv">
           <div className="username">
+            <i className="fa-solid fa-user-music"></i>
             <h2>Created By: {user.username}</h2>
           </div>
           {album && (
@@ -146,7 +147,7 @@ const IndSongPage = () => {
       </div>
     </div>
   ) : (
-    ''
+    ""
   );
 }
 
