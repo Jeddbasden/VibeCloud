@@ -17,8 +17,6 @@ const IndSongPage = () => {
   const comments = useSelector(state => state.data.comments);
   const user = useSelector(state => state.data.user);
 
-  console.log("song:",song)
-
   const [songUrl, setSongUrl] = useState("");
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);

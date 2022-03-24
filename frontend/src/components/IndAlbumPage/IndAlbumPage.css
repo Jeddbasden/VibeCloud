@@ -1,0 +1,35 @@
+.indSongContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  font-family: dm sans,Sans-serif;
+}
+
+.indSongContentDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 85%;
+  height: auto ;
+  margin-top: 15px;
+  border-radius: 20px;
+  opacity: .9;
+  color: #e7eff1;
+  background: linear-gradient(to bottom right, #001845, #5C677D );
+}
+
+.indSongimg {
+  width: 100%;
+  height: 100%;
+  margin-top: 25px;
+  border-radius: 20px;
+}
+
+.imgDiv {
+  height: 60%;
+  width: 60%;
+}

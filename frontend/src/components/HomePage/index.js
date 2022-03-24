@@ -20,15 +20,11 @@ function HomePage() {
 
   if(!sessionUser) return <Redirect to="/"/>
 
-  const handleRedirect = (album) => {
-    history.push(`/albums/${album.id}`)
-  }
-
   return (
     <div id="homeContent">
       <div className="ulDiv">
         <div className="title">
-          <h2>Albums</h2>
+          <h2>Playlists</h2>
         </div>
         <section className="section">
           {albums?.map((album) => {

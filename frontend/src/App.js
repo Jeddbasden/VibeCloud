@@ -15,6 +15,7 @@ import EditCommentPage from "./components/EditCommentPage";
 import IndSongPage from "./components/IndSongPage";
 import "./index.css";
 import { getData } from "./store/data";
+import { getAlbums } from "./store/albums";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function App() {
   
   useEffect(() => {
     dispatch(getData())
+    dispatch(getAlbums())
   }, [sessionUser, dispatch]);
 
   return (
