@@ -11,16 +11,11 @@ router.get(
   "/",
   requireAuth,
   asyncHandler(async (req, res) => {
-
     const albums = await Album.findAll();
 
     const users = await User.findAll();
 
-    const songs = await Song.findAll({
-      where: {
-        albumId: id,
-      }
-    });
+    const songs = await Song.findAll();
 
     res.json({ albums, users, songs });
   })

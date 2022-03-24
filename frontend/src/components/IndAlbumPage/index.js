@@ -10,12 +10,13 @@ const IndAlbumPage = () => {
   const history = useHistory();
   const { id } = useParams(); 
   const sessionUser = useSelector((state) => state.session.user);
-  const songs = useSelector((state) => state.albums.songs);
+  const allSongs = useSelector((state) => state.albums.songs);
   const albums = useSelector((state) => state.albums.albums);
+  const users = useSelector((state) => state.albums.users)
 
   const album = albums?.find(album => album?.id === Number(id));
-  console.log("!!!!!! ALBUM !!!!!!!!", album)
-  const albumUser = useSelector((state) => state.albums.user)
+  const songs = allSongs?.filter(song => song?.albumId === album?.id)
+  const albumUser = users?.find(user => user?.id === album.userId)
 
   const [songUrl, setSongUrl] = useState("");
   
@@ -39,36 +40,54 @@ const IndAlbumPage = () => {
             <h2>Created By: {albumUser?.username}</h2>
           </div>
         </div>
-        <div className="songList">
-          <ul>
-            {songs &&
-              songs.map((song) => {
+        <div>
+          <ul className="songList">
+            <section className="section">
+              {songs?.map((song) => {
                 return (
-                  <li className="songLi" key={song.id}>
-                    <div className="songLiDiv">
-                      <div
-                        className="songImgDiv"
-                        style={{
-                          backgroundImage: `url(${song.imageUrl})`,
-                          backgroundSize: "cover",
-                          height: "100px",
-                          width: "100px",
-                          borderRadius: "15px",
+                  <div className="sectionDiv" key={song.id}>
+                    <div
+                      className="songImgDiv"
+                      style={{
+                        backgroundImage: `url(${
+                          song.imageUrl ||
+                          "https://www.supercheapauto.co.nz/dw/image/v2/BBRV_PRD/on/demandware.static/-/Sites-srg-internal-master-catalog/default/dw15da72ad/images/541944/SCA_541944_hi-res.jpg?sw=1000&sh=1000&sm=fit"
+                        })`,
+                        backgroundSize: "cover",
+                        height: "100px",
+                        width: "100px",
+                        borderRadius: "15px",
+                      }}
+                      onClick={() => {
+                        setSongUrl(song.songUrl);
+                      }}
+                    ></div>
+                    <div className="songTitleDiv">
+                      <div>
+                        <p>{song.title}</p>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          history.push(`/songs/${song.id}`);
                         }}
-                        onClick={() => {
-                          setSongUrl(song.songUrl);
-                        }}
-                      ></div>
+                        className="iconBtn"
+                        type="submit"
+                      >
+                        <i class="fas fa-info-circle"></i>
+                      </button>
                     </div>
-                  </li>
+                  </div>
                 );
               })}
+            </section>
             <div className="audioPlayerDiv">
               {songUrl && (
                 <ReactAudioPlayer
                   className="audioPlayer"
                   src={`${songUrl}`}
                   controls
+                  autoPlay
                 />
               )}
             </div>
