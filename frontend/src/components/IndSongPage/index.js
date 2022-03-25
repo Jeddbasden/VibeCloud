@@ -83,6 +83,7 @@ const IndSongPage = () => {
               <h3>Album: {album.title}</h3>
             </div>
           )}
+          <button type="button">Add to Playlist</button>
         </div>
         <div>
           <form type="submit" onSubmit={handleComment}>
