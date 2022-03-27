@@ -21,14 +21,16 @@ const IndSongPage = () => {
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);
   const [showPlaylist, setShowPlaylist] = useState(false);
+  const [playlist, setPlaylist] = useState()
   
   useEffect(() => {
     dispatch(getSongData(id))
     setComment("")
   }, [dispatch, id ])
 
-  const addToPlaylist = () => {
-    
+  const addToPlaylist = (e) => {
+    e.preventDefault();
+    set
   }
 
   const handleComment =  async (e) => {
@@ -88,6 +90,11 @@ const IndSongPage = () => {
             </div>
           )}
           <button onClick={setShowPlaylist(true)} type="button">Add to Playlist</button>
+          {showPlaylist && (
+            <div>
+              <select onChange={addToPlaylist}
+            </div>
+          )}
         </div>
         <div>
           <form type="submit" onSubmit={handleComment}>
