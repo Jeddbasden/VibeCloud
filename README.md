@@ -6,7 +6,7 @@
 - User's own page that includes their songs and liked songs
 
 # Features to come:
-- Indivual Albums page
+- Indivual Playlists page
 - Song search bar
 - Liking a song
 - Following users
