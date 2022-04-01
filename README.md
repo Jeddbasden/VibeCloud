@@ -21,4 +21,4 @@
   ```npx dotenv sequlize db:migrate & npx dotenv sequelize seed:all``
 - Start the app with: npm start
 
-https://github.com/Jeddbasden/VibeCloud/blob/main/frontend/public/vibecloud.png?raw=true
+![image](https://user-images.githubusercontent.com/74204664/161317908-4919800d-72cb-40a6-b939-699e3f1c994b.png)
