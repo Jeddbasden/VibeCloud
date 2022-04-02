@@ -25,10 +25,10 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
   
-  useEffect(() => {
-    dispatch(getData())
-    dispatch(getAlbums())
-  }, [sessionUser, dispatch]);
+  // useEffect(() => {
+  //   console.log("!!!!!! APP.JS USEEFFECT!!!!!")
+  //   dispatch(getData())
+  // }, [sessionUser, dispatch]);
 
   return (
     <div className="bg">
