@@ -57,8 +57,9 @@ const editComment = (oldComment, newComment) => ({
 
 export const getData = () => async (dispatch) => {
   const data = await fetch("/api/home").then((res) => res.json());
-
-  return dispatch(giveData(data));
+  console.log("!!!!!!!!! GETDATA !!!", data)
+  
+  dispatch(giveData(data));
 };
 
 export const getUserData = (id) => async (dispatch) => {
@@ -92,8 +93,9 @@ export const addCommentToDatabase = ( comment, songId) => async (dispatch) => {
 
 export const getSongData = (id) => async (dispatch) => {
   const data = await csrfFetch(`/api/songs/${id}`).then(res => res.json());
-
-  return  dispatch(giveSongData(data))
+  console.log("!!!!!!! STORE FUNC !!!!!!", data)
+  dispatch(giveSongData(data));
+  console.log("!!!!!!! STORE FUNC !!!!!!", data)
 }
 
 export const updateSong = (oldSong, newSong) => async(dispatch) => {
@@ -146,9 +148,8 @@ export default function dataReducer(state = {}, action) {
       return action.payload;
     
     case GIVE_SONG_DATA:
-      newState = { ...state };
-      newState = action.data;
-      return newState;
+      
+      return action.data;
     
     case ADD_DATA:
       const song = action.data;

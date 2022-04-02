@@ -9,14 +9,15 @@ function HomePage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  const songs = useSelector(state => state.data.songs);
-  const albums = useSelector(state => state.data.albums);
-  const likedSongs = useSelector(state => state.data.likedSongs);
+  const data = useSelector(state => state.data);
+  const songs = data.songs;
+  const albums = data.albums;
+  const likedSongs = data.likedSongs;
   const [songUrl, setSongUrl] = useState("");
 
   useEffect(() => {
     dispatch(getData())
-  }, [dispatch])
+  }, [])
 
   if(!sessionUser) return <Redirect to="/"/>
 

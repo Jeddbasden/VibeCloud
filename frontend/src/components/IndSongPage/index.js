@@ -12,26 +12,30 @@ const IndSongPage = () => {
   const history = useHistory();
 
   const sessionUser = useSelector(state => state.session.user);
-  const song = useSelector(state =>state.data.song);
-  const album = useSelector(state => state.data.album);
-  const comments = useSelector(state => state.data.comments);
-  const user = useSelector(state => state.data.user);
+  const data = useSelector(state => state.data);
+  const songs = data.songs;
+  const albums = data.albums;
+  const allComments = data.comments;
+  const user = data.user;
+
+  const song = songs?.find(song => song?.id === Number(id))
+  console.log("!!! SONG!!!!", song)
+  
+  const album = albums?.find(album => album?.id === song?.albumId)
+  // console.log("!!! ALBUM!!!!", album)
+  
+  const comments = allComments?.filter(comment => comment?.songId === song?.id);
+  // console.log("!!!! COMMENTS!!!!", comments)
 
   const [songUrl, setSongUrl] = useState("");
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);
   const [showPlaylist, setShowPlaylist] = useState(false);
-  const [playlist, setPlaylist] = useState()
-  
-  useEffect(() => {
-    dispatch(getSongData(id))
-    setComment("")
-  }, [dispatch, id ])
 
-  const addToPlaylist = (e) => {
-    e.preventDefault();
-    set
-  }
+
+  // const addToPlaylist = () => {
+    
+  // }
 
   const handleComment =  async (e) => {
     e.preventDefault();
@@ -55,9 +59,7 @@ const IndSongPage = () => {
       </div>
       <div className="indSongContentDiv">
         <div
-          onClick={(e) => {
-            setSongUrl(song.songUrl);
-          }}
+          onClick={(e) => setSongUrl(song.songUrl)}
           className="imgDiv"
         >
           <img
@@ -89,12 +91,7 @@ const IndSongPage = () => {
               <h3>Album: {album.title}</h3>
             </div>
           )}
-          <button onClick={setShowPlaylist(true)} type="button">Add to Playlist</button>
-          {showPlaylist && (
-            <div>
-              <select onChange={addToPlaylist}
-            </div>
-          )}
+          <button onClick={(e) => setShowPlaylist(true)} type="button">Add to Playlist</button>
         </div>
         <div>
           <form type="submit" onSubmit={handleComment}>
@@ -163,4 +160,4 @@ const IndSongPage = () => {
   );
 }
 
-export default IndSongPage
+export default IndSongPage;
