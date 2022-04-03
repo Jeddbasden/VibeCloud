@@ -15,7 +15,6 @@ import EditCommentPage from "./components/EditCommentPage";
 import IndSongPage from "./components/IndSongPage";
 import "./index.css";
 import { getData } from "./store/data";
-import { getAlbums } from "./store/albums";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,10 +24,9 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
   
-  // useEffect(() => {
-  //   console.log("!!!!!! APP.JS USEEFFECT!!!!!")
-  //   dispatch(getData())
-  // }, [sessionUser, dispatch]);
+  useEffect(() => {
+    dispatch(getData())
+  }, [sessionUser, dispatch]);
 
   return (
     <div className="bg">

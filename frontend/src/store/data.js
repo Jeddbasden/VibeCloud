@@ -57,7 +57,6 @@ const editComment = (oldComment, newComment) => ({
 
 export const getData = () => async (dispatch) => {
   const data = await fetch("/api/home").then((res) => res.json());
-  console.log("!!!!!!!!! GETDATA !!!", data)
   
   dispatch(giveData(data));
 };

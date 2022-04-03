@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, Redirect, useHistory } from "react-router-dom";
 import { deleteComment  } from "../../store/data";
 import { getSongData, addCommentToDatabase } from "../../store/data";
+import { getAlbums, addToAlbum } from "../../store/albums";
 import ReactAudioPlayer from "react-audio-player";
 import "./IndSongPage.css";
 
@@ -13,29 +14,26 @@ const IndSongPage = () => {
 
   const sessionUser = useSelector(state => state.session.user);
   const data = useSelector(state => state.data);
+
   const songs = data.songs;
   const albums = data.albums;
   const allComments = data.comments;
   const user = data.user;
 
   const song = songs?.find(song => song?.id === Number(id))
-  console.log("!!! SONG!!!!", song)
-  
   const album = albums?.find(album => album?.id === song?.albumId)
-  // console.log("!!! ALBUM!!!!", album)
-  
   const comments = allComments?.filter(comment => comment?.songId === song?.id);
-  // console.log("!!!! COMMENTS!!!!", comments)
 
   const [songUrl, setSongUrl] = useState("");
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);
   const [showPlaylist, setShowPlaylist] = useState(false);
 
-
-  // const addToPlaylist = () => {
-    
-  // }
+  const addToPlaylist = (e, albumId) => {
+    e.preventDefault();
+    console.log("!!!!!!!! ADD TO PLAYLIST !!!!!!!", albumId, song?.id)
+    dispatch(addToAlbum(albumId, song?.id))
+  }
 
   const handleComment =  async (e) => {
     e.preventDefault();
@@ -91,7 +89,15 @@ const IndSongPage = () => {
               <h3>Album: {album.title}</h3>
             </div>
           )}
-          <button onClick={(e) => setShowPlaylist(true)} type="button">Add to Playlist</button>
+          <button onClick={(e) => setShowPlaylist(!showPlaylist)} type="button">Add to Playlist</button>
+          {showPlaylist && (
+            <select>
+              {albums?.map(album => {
+                return <option key={album?.id} onClick={(e) => addToPlaylist(e, album.id)} value={album?.id}>{album?.title}
+                </option>
+              })}
+            </select>
+          )}
         </div>
         <div>
           <form type="submit" onSubmit={handleComment}>

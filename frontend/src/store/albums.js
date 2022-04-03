@@ -9,7 +9,16 @@ const get_albums = (data) => ({
 
 
 export const getAlbums = () => async (dispatch) => {
-  const data = await fetch(`/api/albums`).then((res) => res.json());
+  const data = await csrfFetch(`/api/albums`).then((res) => res.json());
+  return dispatch(get_albums(data))
+}
+
+export const addToAlbum = (albumId, songId) => async (dispatch) => {
+  const data = await csrfFetch(`/api/albums/${albumId}/${songId}`, {
+    method: "PATCH"
+  })
+  console.log("!!!!!!!!!!! DATA !!!!!", data)
+
   return dispatch(get_albums(data))
 }
 

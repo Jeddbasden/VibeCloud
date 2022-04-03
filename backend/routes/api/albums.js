@@ -21,4 +21,28 @@ router.get(
   })
 );
 
+router.patch(
+  "/:albumId/:songId",
+  requireAuth,
+  asyncHandler(async (res, req) => {
+    const albumId = req.params.albumId
+    const songId = req.params.songId
+
+    const song = Song.findByPk(songId)
+    console.log("!!!!!! SONG!!!!!", song)
+    if (song) song.update({
+      albumId,
+    })
+
+    const albums = await Album.findAll();
+
+    const users = await User.findAll();
+
+    const songs = await Song.findAll();
+    console.log("!!!!!!!!! DATA !!!!!!!", data)
+    res.json({ albums, users, songs });
+
+  })
+)
+
 module.exports = router
