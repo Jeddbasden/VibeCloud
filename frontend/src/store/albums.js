@@ -13,14 +13,6 @@ export const getAlbums = () => async (dispatch) => {
   return dispatch(get_albums(data))
 }
 
-export const addToAlbum = (albumId, songId) => async (dispatch) => {
-  const data = await csrfFetch(`/api/albums/${albumId}/${songId}`, {
-    method: "PATCH"
-  })
-  console.log("!!!!!!!!!!! DATA !!!!!", data)
-
-  return dispatch(get_albums(data))
-}
 
 export default function albumsReducer(state = {}, action) {
 

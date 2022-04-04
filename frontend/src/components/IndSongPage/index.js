@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Redirect, useHistory } from "react-router-dom";
 import { deleteComment  } from "../../store/data";
-import { getSongData, addCommentToDatabase } from "../../store/data";
-import { getAlbums, addToAlbum } from "../../store/albums";
+import {
+  addCommentToDatabase,
+  addToAlbum,
+} from "../../store/data";
 import ReactAudioPlayer from "react-audio-player";
 import "./IndSongPage.css";
 
@@ -28,11 +30,11 @@ const IndSongPage = () => {
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);
   const [showPlaylist, setShowPlaylist] = useState(false);
+  const [selected, setSelected] = useState(song?.albumId)
 
-  const addToPlaylist = (e, albumId) => {
+  const addToPlaylist = async (e, albumId) => {
     e.preventDefault();
-    console.log("!!!!!!!! ADD TO PLAYLIST !!!!!!!", albumId, song?.id)
-    dispatch(addToAlbum(albumId, song?.id))
+    await dispatch(addToAlbum(albumId, song?.id))
   }
 
   const handleComment =  async (e) => {
@@ -86,14 +88,18 @@ const IndSongPage = () => {
           </div>
           {album && (
             <div className="indAlbumTitle">
-              <h3>Album: {album.title}</h3>
+              <h3>Playlist: {album.title}</h3>
             </div>
           )}
           <button onClick={(e) => setShowPlaylist(!showPlaylist)} type="button">Add to Playlist</button>
           {showPlaylist && (
-            <select>
+            <select value={selected}  onChange={(e) => {
+              setShowPlaylist(false)
+              addToPlaylist(e, e.target.value)
+              setSelected(e.target.value)
+            }}>
               {albums?.map(album => {
-                return <option key={album?.id} onClick={(e) => addToPlaylist(e, album.id)} value={album?.id}>{album?.title}
+                return <option key={album?.id} value={album?.id}>{album?.title}
                 </option>
               })}
             </select>

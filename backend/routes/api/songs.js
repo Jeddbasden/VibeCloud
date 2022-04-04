@@ -30,7 +30,10 @@ router.get("/:id", requireAuth, asyncHandler(async (req, res) => {
   const comments = await Comment.findAll({
     where: {
       songId: id,
-    }
+    },
+    order: [
+      ['id', 'ASC']
+    ]
   });
 
   const user = await User.findOne({

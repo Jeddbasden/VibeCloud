@@ -7,15 +7,26 @@ const router = express.Router();
 
 
 router.get("/", requireAuth, restoreUser, asyncHandler(async (req, res) => {
-  const songs = await Song.findAll();
-  const albums = await Album.findAll();
+  const songs = await Song.findAll({
+    order: [
+      ['id', 'ASC'],
+    ]
+  });
+  const albums = await Album.findAll({
+    order: [["id", "ASC"]],
+  });
   const userId = req.user.id;
   const user = await User.findByPk(userId);
-  const comments = await Comment.findAll();
+  const comments = await Comment.findAll({
+    order: [["id", "ASC"]],
+  });
   const likes = await Like.findAll({
     where: {
       userId,
-    }
+    },
+    order: [
+      ['id', 'ASC']
+    ]
   });
   
   const likedSongs = [];

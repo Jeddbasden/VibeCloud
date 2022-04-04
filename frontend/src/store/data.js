@@ -8,7 +8,7 @@ const UPDATE_DATA = "data/updateData"
 const REMOVE_COMMENT = "data/removeComment"
 const ADD_COMMENT = "data/addComment"
 const EDIT_COMMENT = "data/editComment"
-
+const ADD_TO_PLAYLIST = "data/add_to_playlist"
 
 const giveData = (data) => {
   return {
@@ -52,6 +52,11 @@ const editComment = (oldComment, newComment) => ({
   type: EDIT_COMMENT,
   oldComment,
   newComment,
+})
+
+const add_to_playlist = (updatedSong) => ({
+  type: ADD_TO_PLAYLIST,
+  updatedSong,
 })
 
 
@@ -112,7 +117,6 @@ export const updateSong = (oldSong, newSong) => async(dispatch) => {
 }
 
 export const updateComment = (oldComment, newComment) => async (dispatch) => {
-  // console.log("newComment:",newComment)
   const res = await csrfFetch(`/api/comments/edit/${oldComment.id}`, {
     method: "PATCH",
     body: JSON.stringify({ newComment })
@@ -136,6 +140,16 @@ export const deleteSong = (song) => async (dispatch) => {
 
   if(res.ok) return dispatch(removeData(song))
 } 
+
+export const addToAlbum = (albumId, songId) => async (dispatch) => {
+  let song = await csrfFetch(`/api/albums/${albumId}/${songId}`, {
+    method: "PATCH",
+  }).then((res) => res.json());
+  song = song.song
+  console.log("!!!!!!!!!!! DATA ALBUM STORE!!!!!", song);
+  
+  return dispatch(add_to_playlist(song));
+};
 
 
 export default function dataReducer(state = {}, action) {
@@ -187,17 +201,19 @@ export default function dataReducer(state = {}, action) {
       return newState
     
     case EDIT_COMMENT:
-      // console.log("oldcomment:",action.oldComment)
       const cIndex = state.comments.indexOf(action.oldComment);
-      // console.log(cIndex)
-      // console.log("state:",state)
       newState = { ...state }
-      // console.log("newState:", newState)
-      // console.log("newComment:", action.newComment);
       newState.comments[cIndex] = action.newComment;
-      // console.log("newState:",newState)
       return newState
       
+    case ADD_TO_PLAYLIST:
+      const updatedSong = action.updatedSong;
+      newState = { ...state }
+      const foundSong = newState.songs.find(song => song.id === updatedSong.id)
+      const fSongIndex = newState.songs.indexOf(foundSong)
+      newState.songs[fSongIndex] = updatedSong
+
+      return newState
     default:
       return state;
   }

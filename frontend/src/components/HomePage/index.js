@@ -17,7 +17,7 @@ function HomePage() {
 
   useEffect(() => {
     dispatch(getData())
-  }, [])
+  }, [dispatch])
 
   if(!sessionUser) return <Redirect to="/"/>
 
