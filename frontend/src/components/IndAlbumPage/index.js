@@ -32,8 +32,8 @@ const IndAlbumPage = () => {
         <h1>{album?.title}</h1>
       </div>
       <div className="indSongContentDiv">
-        <div className="imgDiv">
-          <img className="indSongImg" src={`${album?.imageUrl}`} alt="" />
+        <div className="indAlbumImgDiv">
+          <img className="indAlbumImg" src={`${album?.imageUrl}`} alt="" />
         </div>
         <div className="indTitleDiv">
           <div className="username">
