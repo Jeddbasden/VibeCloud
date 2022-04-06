@@ -39,6 +39,10 @@ const UserPage = () => {
             return (
               <div className="sectionDiv" key={album.id}>
                 <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    history.push(`/albums/${album.id}`);
+                  }}
                   className="albumEffectDiv"
                   onMouseOver={(e) => {
                     e.target.className = "albumImgHover";
