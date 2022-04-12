@@ -62,14 +62,21 @@ section {
   filter: brightness(1.25);
   opacity: 1;
   width: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 125px;
   border-radius: 0;
 }
 
+
 .albumImgDiv {
+  display: flex;
   width: 100px;
   height: 100px;
   box-shadow: -5px 5px rgba(0, 0, 0, 0.142);
+  justify-content: center;
+  align-items: center;
 }
 
 .albumEffectDiv {
@@ -102,6 +109,14 @@ section {
   opacity: 0.75;
 }
 
+.playlistTitle {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0px;
+}
+
 .title {
   display: flex;
   justify-content: center;
@@ -109,6 +124,7 @@ section {
   height: 40px;
   width: 100%;
   margin: 0px;
+  padding: 0px;
   background-color: rgba(17, 17, 18, 0.8);
 }
 
@@ -126,6 +142,10 @@ section {
   border-radius: 5px;
   background-color: #979dac;
   height: 20px;
+}
+
+.addDiv{
+  margin-right: 10px;
 }
 
 .songTitleDiv {

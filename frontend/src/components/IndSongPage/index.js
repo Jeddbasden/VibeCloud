@@ -30,13 +30,15 @@ const IndSongPage = () => {
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);
   const [showPlaylist, setShowPlaylist] = useState(false);
-  const [selected, setSelected] = useState(song?.albumId)
+  const [selected, setSelected] = useState(song?.albumId);
 
   const addToPlaylist = async (e, albumId) => {
     e.preventDefault();
     await dispatch(addToAlbum(albumId, song?.id))
   }
-
+  
+  const boolean = song?.userId === sessionUser?.id
+    
   const handleComment =  async (e) => {
     e.preventDefault();
     const error = []
@@ -58,10 +60,7 @@ const IndSongPage = () => {
         <h1>{song.title}</h1>
       </div>
       <div className="indSongContentDiv">
-        <div
-          onClick={(e) => setSongUrl(song.songUrl)}
-          className="imgDiv"
-        >
+        <div onClick={(e) => setSongUrl(song.songUrl)} className="imgDiv">
           <img
             className="indSongimg"
             src={`${
@@ -88,21 +87,38 @@ const IndSongPage = () => {
           </div>
           {album && (
             <div className="indAlbumTitle">
-              <h3>Playlist: {album.title}</h3>
+              <h3>Album: {album.title}</h3>
             </div>
           )}
-          <button onClick={(e) => setShowPlaylist(!showPlaylist)} type="button">Add to Playlist</button>
-          {showPlaylist && (
-            <select value={selected}  onChange={(e) => {
-              setShowPlaylist(false)
-              addToPlaylist(e, e.target.value)
-              setSelected(e.target.value)
-            }}>
-              {albums?.map(album => {
-                return <option key={album?.id} value={album?.id}>{album?.title}
-                </option>
-              })}
-            </select>
+          {boolean && (
+            <div className="addToAlbum">
+              <button
+                className="iconBtn "
+                onClick={(e) => setShowPlaylist(!showPlaylist)}
+                type="button"
+              >
+                Add to/change Album
+              </button>
+              {showPlaylist && (
+                <select
+                  className="iconBtn"
+                  value={selected}
+                  onChange={(e) => {
+                    setShowPlaylist(false);
+                    addToPlaylist(e, e.target.value);
+                    setSelected(e.target.value);
+                  }}
+                >
+                  {albums?.map((album) => {
+                    return (
+                      <option key={album?.id} value={album?.id}>
+                        {album?.title}
+                      </option>
+                    );
+                  })}
+                </select>
+              )}
+            </div>
           )}
         </div>
         <div>

@@ -19,6 +19,13 @@
   font-family: dm sans,Sans-serif;
 }
 
+.addToAlbum {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50px;
+}
+
 .songList {
   box-sizing: border-box;
   display: flex;

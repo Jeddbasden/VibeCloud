@@ -19,7 +19,6 @@ module.exports = {
       },
       genre: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       imageUrl: {
         type: Sequelize.STRING,

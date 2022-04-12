@@ -25,7 +25,12 @@ function HomePage() {
     <div id="homeContent">
       <div className="ulDiv">
         <div className="title">
-          <h2>Playlists</h2>
+          <div className="PlaylistTitle">
+            <h2>Albums</h2>
+          </div>
+          <div className="addDiv">
+            <h3 onClick={(e) => history.push("/albums/add")} className="add">Add</h3>
+          </div>
         </div>
         <section className="section">
           {albums?.map((album) => {
@@ -43,6 +48,9 @@ function HomePage() {
                     height: "100px",
                     width: "100px",
                     borderRadius: "15px",
+                    contain: "content",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
                   }}
                 ></div>
                 <div className="albumTitle">

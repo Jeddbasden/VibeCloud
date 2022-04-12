@@ -16,10 +16,29 @@ router.get(
     const users = await User.findAll();
 
     const songs = await Song.findAll();
-
+    
     res.json({ albums, users, songs });
   })
-);
+  );
+  
+router.post("/add",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const title = req.body.title;
+    const imageUrl = req.body.imageUrl;
+    const userId = req.body.userId;
+
+    const newAlbum = await Album.create({
+      userId,
+      title,
+      imageUrl,
+      genre: "music"
+    })
+
+    const albums = await Album.findAll()
+    res.json({albums})
+  })
+)
 
 router.patch(
   "/:albumId/:songId",
@@ -37,5 +56,6 @@ router.patch(
     res.json({song});
   })
 )
+
 
 module.exports = router

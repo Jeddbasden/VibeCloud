@@ -9,6 +9,7 @@ const REMOVE_COMMENT = "data/removeComment"
 const ADD_COMMENT = "data/addComment"
 const EDIT_COMMENT = "data/editComment"
 const ADD_TO_PLAYLIST = "data/add_to_playlist"
+const ADD_ALBUM = "data/add_album";
 
 const giveData = (data) => {
   return {
@@ -59,6 +60,12 @@ const add_to_playlist = (updatedSong) => ({
   updatedSong,
 })
 
+const add_album = (data) => ({
+  type: ADD_ALBUM,
+  data,
+})
+
+
 
 export const getData = () => async (dispatch) => {
   const data = await fetch("/api/home").then((res) => res.json());
@@ -97,10 +104,22 @@ export const addCommentToDatabase = ( comment, songId) => async (dispatch) => {
 
 export const getSongData = (id) => async (dispatch) => {
   const data = await csrfFetch(`/api/songs/${id}`).then(res => res.json());
-  console.log("!!!!!!! STORE FUNC !!!!!!", data)
+
   dispatch(giveSongData(data));
-  console.log("!!!!!!! STORE FUNC !!!!!!", data)
 }
+
+export const addAlbumToDatabase = (albumInfo) => async (dispatch) => {
+  const data = await csrfFetch("/api/albums/add", {
+    method: "POST",
+    body: JSON.stringify({
+      title: albumInfo.albumTitle,
+      imageUrl: albumInfo.albumImgUrlStr,
+      userId: albumInfo.sessionUser.id,
+    }),
+  }).then((res) => res.json());
+
+  return dispatch(add_album(data));
+};
 
 export const updateSong = (oldSong, newSong) => async(dispatch) => {
   const res = await csrfFetch(`/api/songs/edit/${newSong.id}`, {
@@ -146,7 +165,6 @@ export const addToAlbum = (albumId, songId) => async (dispatch) => {
     method: "PATCH",
   }).then((res) => res.json());
   song = song.song
-  console.log("!!!!!!!!!!! DATA ALBUM STORE!!!!!", song);
   
   return dispatch(add_to_playlist(song));
 };
@@ -157,13 +175,11 @@ export default function dataReducer(state = {}, action) {
 
   switch (action.type) {
     case GIVE_DATA:
-      
       return action.payload;
-    
+
     case GIVE_SONG_DATA:
-      
       return action.data;
-    
+
     case ADD_DATA:
       const song = action.data;
       const { songs } = state;
@@ -171,49 +187,57 @@ export default function dataReducer(state = {}, action) {
       newState = { ...state };
       newState.songs = newSongs;
       return newState;
-    
+
     case REMOVE_DATA:
-      const oldSongs = state.userSongs
+      const oldSongs = state.userSongs;
       newState = { ...state };
-      newState.userSongs = oldSongs.filter(song => {
-        return song.id !== action.data.id
-      })     
-      return newState
-    
+      newState.userSongs = oldSongs.filter((song) => {
+        return song.id !== action.data.id;
+      });
+      return newState;
+
     case UPDATE_DATA:
       const index = state.songs.indexOf(action.oldData);
-      newState = { ...state }
+      newState = { ...state };
       newState.songs[index] = action.newData;
-      return newState
-    
+      return newState;
+
     case REMOVE_COMMENT:
-      const oldComments = state.comments
+      const oldComments = state.comments;
       newState = { ...state };
-      newState.comments = oldComments.filter(comment => {
-        return comment.id !== action.comment.id
-      })     
-      return newState
-    
+      newState.comments = oldComments.filter((comment) => {
+        return comment.id !== action.comment.id;
+      });
+      return newState;
+
     case ADD_COMMENT:
-      const prevComments = state.comments
+      const prevComments = state.comments;
       newState = { ...state };
-      newState.comments = [...prevComments, action.comment]
-      return newState
-    
+      newState.comments = [...prevComments, action.comment];
+      return newState;
+
     case EDIT_COMMENT:
       const cIndex = state.comments.indexOf(action.oldComment);
-      newState = { ...state }
+      newState = { ...state };
       newState.comments[cIndex] = action.newComment;
-      return newState
-      
+      return newState;
+
     case ADD_TO_PLAYLIST:
       const updatedSong = action.updatedSong;
-      newState = { ...state }
-      const foundSong = newState.songs.find(song => song.id === updatedSong.id)
-      const fSongIndex = newState.songs.indexOf(foundSong)
-      newState.songs[fSongIndex] = updatedSong
+      newState = { ...state };
+      const foundSong = newState.songs.find(
+        (song) => song.id === updatedSong.id
+      );
+      const fSongIndex = newState.songs.indexOf(foundSong);
+      newState.songs[fSongIndex] = updatedSong;
+      return newState;
 
-      return newState
+    case ADD_ALBUM:
+      newState = { ...state };
+      console.log("!!!! NEW STATE !!!", newState)
+      newState.data.albums = action.data
+      return newState;
+    
     default:
       return state;
   }

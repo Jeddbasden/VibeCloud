@@ -32,7 +32,7 @@ const UserPage = () => {
       </div>
       <div className="ulDiv">
         <div className="title">
-          <h2> My Playlists</h2>
+          <h2> My Albums</h2>
         </div>
         <section className="section">
           {userAlbums?.map((album) => {
