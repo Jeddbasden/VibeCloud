@@ -57,5 +57,19 @@ router.patch(
   })
 )
 
+router.delete(
+  "/:albumId/delete",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const albumId = req.params.albumId;
+    const album = await Album.findByPk(albumId)
+
+    await album.destroy();
+
+    const albums = await Album.findAll()
+    
+    res.json({albums})
+  })
+)
 
 module.exports = router

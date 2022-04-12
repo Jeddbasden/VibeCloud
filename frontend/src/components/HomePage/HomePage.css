@@ -13,6 +13,8 @@
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   grid-column-end: span 4;
   cursor: pointer;
   transition: all 0.3s ease 0s;
@@ -86,7 +88,11 @@ section {
 
 .albumTitle {
   margin-top: 10px;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .songImgDiv {
