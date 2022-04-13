@@ -9,7 +9,7 @@ const REMOVE_COMMENT = "data/removeComment"
 const ADD_COMMENT = "data/addComment"
 const EDIT_COMMENT = "data/editComment"
 const ADD_TO_PLAYLIST = "data/add_to_playlist"
-const ADD_ALBUM = "data/add_album";
+const UPDATE_ALBUMS = "data/update_albums";
 
 const giveData = (data) => {
   return {
@@ -60,8 +60,8 @@ const add_to_playlist = (updatedSong) => ({
   updatedSong,
 })
 
-const add_album = (data) => ({
-  type: ADD_ALBUM,
+const update_albums = (data) => ({
+  type: UPDATE_ALBUMS,
   data,
 })
 
@@ -117,9 +117,18 @@ export const addAlbumToDatabase = (albumInfo) => async (dispatch) => {
       userId: albumInfo.sessionUser.id,
     }),
   }).then((res) => res.json());
-
-  return dispatch(add_album(data));
+  
+  return dispatch(update_albums(data));
 };
+
+export const deleteAlbum = (albumId) => async (dispatch) => {
+  const data = await csrfFetch(`/api/albums/${albumId}/delete`, {
+    method: "DELETE",
+  }).then(res => res.json());
+
+  return dispatch(update_albums(data));
+} 
+
 
 export const updateSong = (oldSong, newSong) => async(dispatch) => {
   const res = await csrfFetch(`/api/songs/edit/${newSong.id}`, {
@@ -168,6 +177,7 @@ export const addToAlbum = (albumId, songId) => async (dispatch) => {
   
   return dispatch(add_to_playlist(song));
 };
+
 
 
 export default function dataReducer(state = {}, action) {
@@ -232,10 +242,9 @@ export default function dataReducer(state = {}, action) {
       newState.songs[fSongIndex] = updatedSong;
       return newState;
 
-    case ADD_ALBUM:
+    case UPDATE_ALBUMS:
       newState = { ...state };
-      console.log("!!!! NEW STATE !!!", newState)
-      newState.data.albums = action.data
+      newState.albums = action.data.albums
       return newState;
     
     default:

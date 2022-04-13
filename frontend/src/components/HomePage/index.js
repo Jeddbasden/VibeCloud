@@ -4,6 +4,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import { getData } from "../../store/data"
 import ReactAudioPlayer from 'react-audio-player';
 import "./HomePage.css";
+import Buttons from "./Buttons";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -34,6 +35,9 @@ function HomePage() {
         </div>
         <section className="section">
           {albums?.map((album) => {
+            let AlbumOwner = 
+              album.userId === sessionUser.id
+            ? true : false
             return (
               <div className="sectionDiv" key={album.id}>
                 <div
@@ -55,6 +59,7 @@ function HomePage() {
                 ></div>
                 <div className="albumTitle">
                   <h3>{album.title}</h3>
+                  {AlbumOwner && (<Buttons album={album} />)}
                 </div>
               </div>
             );
