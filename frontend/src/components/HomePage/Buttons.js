@@ -17,7 +17,7 @@ const Buttons = ({ album }) => {
           onClick={(e) => {
             e.preventDefault();
             const confirmed = window.confirm(
-              `Are you sure you want to delete ${album?.title}?`
+              `Are you sure you want to delete "${album?.title}"?`
             );
             if (confirmed) handleAlbumDelete(album);
           }}
