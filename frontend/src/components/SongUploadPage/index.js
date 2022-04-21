@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { addSongToDatabase } from "../../store/data";
+import { useDropzone } from "react-dropzone";
 
 const SongUploadPage = () => {
   const history = useHistory()
@@ -11,6 +12,20 @@ const SongUploadPage = () => {
   const [songUrl, setSongUrl] = useState("");
   const [songImgUrl, setSongImgUrl] = useState("");
   const [errors, setErrors] = useState([])
+  const [files, setFiles] = useState([]);
+  
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "audio/*",
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>  {
+          return Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          });
+        })
+      );
+    },
+  });
   
   if(!sessionUser) return <Redirect to="/login" />
 
@@ -39,49 +54,56 @@ const SongUploadPage = () => {
     
   };
 
+
   return (
-    <div className="content">
+    <div className='content'>
       <form onSubmit={handleSubmit}>
-        <div className="formDiv">
+        <div className='formDiv'>
           <ul>
-            {errors?.map(error => (
+            {errors?.map((error) => (
               <li key={errors.indexOf(error)}>{error}</li>
             ))}
           </ul>
-          <div className="labelInput">
+          <div className='labelInput'>
             <label>
               Song Title
               <input
-                type="text"
+                type='text'
                 value={songTitle}
                 onChange={(e) => setSongTitle(e.target.value)}
                 required
               />
             </label>
           </div>
-          <div className="labelInput">
+          <div className='labelInput'>
             <label>
               Song Image Url
               <input
-                type="text"
+                type='text'
                 value={songImgUrl}
                 onChange={(e) => setSongImgUrl(e.target.value)}
               />
             </label>
           </div>
-          <div className="labelInput">
+          <div className='labelInput'>
             <label>
               Song Url
               <input
-                type="text"
+                type='text'
                 value={songUrl}
                 onChange={(e) => setSongUrl(e.target.value)}
                 required
               />
             </label>
           </div>
-          <div className="submitBtn">
-            <button className="Btn" type="submit">
+          <div className='dropZone'>
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              <p>Drop Files Here</p>
+            </div>
+          </div>
+          <div className='submitBtn'>
+            <button className='Btn' type='submit'>
               Upload
             </button>
           </div>
