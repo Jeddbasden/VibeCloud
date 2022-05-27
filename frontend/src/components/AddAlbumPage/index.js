@@ -61,6 +61,7 @@ const AddAlbumPage = () => {
               Album Image Url
               <input
                 type="text"
+                maxlength="2"
                 value={albumImgUrl}
                 onChange={(e) => setAlbumImgUrl(e.target.value)}
               />
